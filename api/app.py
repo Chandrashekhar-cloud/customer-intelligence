@@ -663,7 +663,10 @@ def create_app(model_path: str = "models/best_churn_model.joblib") -> Flask:
     return app
 
 
+# Expose module-level Flask application for WSGI servers (Gunicorn, Render, uWSGI)
+app = create_app()
+
 if __name__ == "__main__":
-    app = create_app()
-    print("[*] Starting Flask REST API on http://127.0.0.1:5000...")
-    app.run(host="127.0.0.1", port=5000, debug=False)
+    port = int(os.environ.get("PORT", 5000))
+    print(f"[*] Starting Flask REST API on http://127.0.0.1:{port}...")
+    app.run(host="0.0.0.0", port=port, debug=False)
