@@ -1,358 +1,764 @@
-# E-Commerce Customer Churn Prediction & Analytics System
-> Complete, verified end-to-end Machine Learning pipeline, Flask REST API, automated test suite, and interactive frontend dashboard implementing Assignment 2.
+# Customer Intelligence
 
-[![Python](https://img.shields.io/badge/Python-3.12-blue.svg)](https://www.python.org/)
-[![Flask](https://img.shields.io/badge/Flask-3.1.3-green.svg)](https://flask.palletsprojects.com/)
-[![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-1.9.0-orange.svg)](https://scikit-learn.org/)
-[![Pytest](https://img.shields.io/badge/Tests-8%20Passed-brightgreen.svg)](https://pytest.org/)
-[![License](https://img.shields.io/badge/License-MIT-purple.svg)]()
+> A production-oriented B2B Customer Intelligence platform that uses Machine Learning to analyze customer behavior, estimate churn risk, explain risk factors, and help business teams prioritize customer retention actions.
 
----
+## Overview
 
-## Table of Contents
-1. [Project Overview](#1-project-overview)
-2. [Problem Statement](#2-problem-statement)
-3. [Objectives](#3-objectives)
-4. [Technology Stack](#4-technology-stack)
-5. [Project Architecture](#5-project-architecture)
-6. [Dataset Description](#6-dataset-description)
-7. [Milestone 1: Synthetic Data Engineering](#7-milestone-1-synthetic-data-engineering)
-8. [Milestone 2: EDA & Feature Engineering](#8-milestone-2-eda--feature-engineering)
-9. [Feature Engineering Formulas](#9-feature-engineering-formulas)
-10. [ML Models](#10-ml-models)
-11. [Evaluation Metrics & Rationale](#11-evaluation-metrics--rationale)
-12. [Model Comparison & Results](#12-model-comparison--results)
-13. [API Documentation](#13-api-documentation)
-14. [API Example Request](#14-api-example-request)
-15. [API Example Response](#15-api-example-response)
-16. [Automated Testing Instructions](#16-automated-testing-instructions)
-17. [Frontend Dashboard Instructions](#17-frontend-dashboard-instructions)
-18. [Installation & Setup](#18-installation--setup)
-19. [Complete Execution Commands](#19-complete-execution-commands)
-20. [Project Limitations](#20-project-limitations)
-21. [Future Improvements](#21-future-improvements)
-22. [AI Tools Used & Prompts](#22-ai-tools-used--prompts)
-23. [Viva & Interview Questions](#23-viva--interview-questions)
+**Customer Intelligence** is an end-to-end Machine Learning application designed for businesses that want to understand customer behavior and identify accounts that may be at risk of churn.
 
----
+The system combines:
 
-## 1. Project Overview
-This project delivers a production-ready Machine Learning system that predicts whether an e-commerce customer is at risk of churning. Designed to satisfy all 5 milestones of Assignment 2, the system includes synthetic data generation with real-world flaws, leak-free preprocessing, SMOTE class balancing, hyperparameter optimization, Flask REST API deployment, 8 automated unit tests, and a modern web dashboard.
+- Customer data processing
+- Exploratory Data Analysis
+- Feature engineering
+- Machine Learning
+- Explainable churn-risk prediction
+- REST API
+- Automated testing
+- Interactive web application
+- Production deployment
+
+The platform is designed for internal business teams such as:
+
+- Customer Success
+- Customer Retention
+- Business Analysts
+- Operations
+- Account Managers
+- Business Managers
+
+Instead of showing only a raw prediction such as `Churn = Yes/No`, the system converts the prediction into a practical customer-risk view containing:
+
+- Churn probability
+- Risk level
+- Risk drivers
+- Protective signals
+- Customer information
+- Recommended prioritization context
 
 ---
 
-## 2. Problem Statement
-E-commerce businesses suffer high acquisition costs when existing subscribers churn silently. Given multi-dimensional customer behavioral telemetry (login recency, support ticket complaints, contract types, and payment delays), build a binary classifier to predict:
-- `churn = 0`: Customer Retained
-- `churn = 1`: Customer Churned
+## Key Features
+
+### Customer Intelligence
+
+View important information about individual customer accounts and understand their current profile.
+
+### Explainable Risk
+
+The system provides the main factors contributing to a customer's predicted churn risk rather than presenting only a probability.
+
+### Customer Prioritization
+
+Customers can be organized according to their predicted risk so business teams can focus attention on higher-risk accounts.
+
+### Batch Analysis
+
+Customer datasets can be processed to analyze multiple customer accounts.
+
+### Search and Filtering
+
+Customer records can be searched and filtered to locate relevant accounts quickly.
+
+### Machine Learning Prediction
+
+The platform uses trained Machine Learning models to estimate customer churn probability.
+
+### REST API
+
+The trained model is exposed through Flask API endpoints for programmatic predictions.
+
+### Automated Testing
+
+The backend includes automated tests covering API behavior and prediction functionality.
+
+### Production Deployment
+
+The backend is deployed using Gunicorn on Render.
 
 ---
 
-## 3. Objectives
-- Generate 5,000 synthetic records with realistic flaws (imbalance, missing values, correlated anomalies).
-- Implement zero-leakage preprocessing and 5 domain-engineered features.
-- Train baseline Logistic Regression vs. tuned Random Forest and evaluate using non-accuracy metrics (Recall, PR-AUC, F1).
-- Deploy an independent Flask REST API with strict schema validation.
-- Provide automated unit testing with 100% pass rate.
-- Build an interactive frontend with live customer presets and inference visualization.
+# System Architecture
 
----
-
-## 4. Technology Stack
-- **Core:** Python 3.12, NumPy, Pandas, SciPy
-- **Machine Learning:** Scikit-learn, Imbalanced-learn (SMOTE), Joblib
-- **Visualization:** Matplotlib, Seaborn
-- **Backend API:** Flask 3.1.3, Flask-CORS
-- **Testing:** Pytest
-- **Frontend:** HTML5, Modern Vanilla CSS, JavaScript (Fetch API)
-
----
-
-## 5. Project Architecture
-
-```
-aiml/
-│
-├── data/
-│   ├── raw/
-│   │   ├── ecommerce_churn_raw.csv     # 5,000 raw synthetic records
-│   │   └── dataset_metadata.json       # Metadata & distribution specs
-│   └── processed/
-│       ├── train.csv                   # Clean processed training fold
-│       ├── test.csv                    # Clean processed test fold
-│       └── data_dictionary.json        # Data dictionary explaining all features
-│
-├── notebooks/
-│   └── churn_analysis_walkthrough.ipynb # Comprehensive Jupyter walkthrough
-│
-├── src/
-│   ├── __init__.py
-│   ├── data_generation.py              # Milestone 1 synthetic generator
-│   ├── preprocessing.py                # Leak-free cleaning & imputation
-│   ├── feature_engineering.py          # Domain behavioral feature engineering
-│   ├── eda.py                          # Milestone 2 EDA scripts & plots
-│   ├── train.py                        # Milestone 3 training & GridSearchCV
-│   ├── evaluate.py                     # Milestone 3 evaluation metrics & reports
-│   └── model_utils.py                  # Joblib serialization & inference pipeline
-│
-├── models/
-│   ├── best_churn_model.joblib         # Serialized production pipeline
-│   ├── baseline_logistic_model.joblib  # Serialized baseline model
-│   ├── preprocessing_pipeline.joblib   # Serialized preprocessor transformers
-│   └── model_metadata.json             # Hyperparameters & evaluation metrics
-│
-├── api/
-│   ├── __init__.py
-│   ├── app.py                          # Flask REST API (/health, /predict)
-│   └── schemas.py                      # Input schema validator & boundary checks
-│
-├── tests/
-│   ├── __init__.py
-│   └── test_api.py                     # 8 automated Pytest test cases
-│
-├── frontend/
-│   ├── index.html                      # Interactive dashboard HTML5
-│   ├── styles.css                      # Modern dark-mode styling
-│   └── app.js                          # Client-side API dispatch & presets
-│
-├── reports/
-│   ├── figures/                        # 10 generated publication-grade figures
-│   │   ├── 01_churn_distribution.png
-│   │   ├── 02_correlation_heatmap.png
-│   │   ├── 03_numerical_distributions.png
-│   │   ├── 04_churn_by_contract_type.png
-│   │   ├── 05_churn_by_subscription_type.png
-│   │   ├── 06_important_feature_relationships.png
-│   │   ├── 07_outlier_analysis.png
-│   │   ├── 08_roc_curves.png
-│   │   ├── 09_precision_recall_curves.png
-│   │   └── 10_confusion_matrices.png
-│   ├── model_evaluation_report.md      # Formal Milestone 3 report
-│   └── Final_Project_Report.md         # Full academic project report
-│
-├── requirements.txt                    # Exact pinned dependencies
-├── run_project.bat                     # Windows one-click runner
-├── README.md                           # Documentation
-└── .gitignore                          # Git exclusions
+```text
+                    ┌─────────────────────┐
+                    │     Web Browser     │
+                    │  Customer Intelligence
+                    │       Frontend      │
+                    └──────────┬──────────┘
+                               │
+                               │ HTTP
+                               ▼
+                    ┌─────────────────────┐
+                    │     Flask REST API  │
+                    │                     │
+                    │ /health             │
+                    │ /predict            │
+                    └──────────┬──────────┘
+                               │
+                               ▼
+                    ┌─────────────────────┐
+                    │ ML Inference Layer  │
+                    │                     │
+                    │ Preprocessing       │
+                    │ Feature Engineering │
+                    │ Model               │
+                    └──────────┬──────────┘
+                               │
+                               ▼
+                    ┌─────────────────────┐
+                    │ Customer Risk       │
+                    │ Prediction          │
+                    │                     │
+                    │ Probability         │
+                    │ Risk Tier           │
+                    │ Risk Drivers        │
+                    │ Protective Signals  │
+                    └─────────────────────┘
 ```
 
 ---
 
-## 6. Dataset Description
-The dataset consists of **5,000 records** and **12 raw features**:
-- `customer_age`: 18 – 75 years
-- `tenure_months`: 1 – 72 months
-- `monthly_spend`: $15.00 – $910.38
-- `total_spend`: Lifetime spend in USD
-- `login_frequency`: Monthly app logins (1 – 50)
-- `support_tickets`: Support tickets raised in 6 months (0 – 14)
-- `payment_delay_days`: Days overdue on invoices (0 – 84)
-- `subscription_type`: Basic, Standard, Premium
-- `contract_type`: Month-to-Month, One-Year, Two-Year
-- `discount_used`: 0 = No, 1 = Yes
-- `last_login_days`: Days since last active session (1 – 90)
-- `churn`: Target (0 = Retained, 1 = Churned)
+# Machine Learning Pipeline
 
----
+The Machine Learning workflow follows an end-to-end pipeline:
 
-## 7. Milestone 1: Synthetic Data Engineering
-Executed via `python src/data_generation.py`:
-- Injected ~84/16 class imbalance (4,189 Retained, 811 Churned).
-- Injected missing values: `monthly_spend` (194 missing, 3.88%), `support_tickets` (174 missing, 3.48%), `last_login_days` (247 missing, 4.94%).
-- Generated correlated behavioral anomalies (disengaged customers on month-to-month contracts with high delays experiencing compounding churn propensity).
-- Exported `data/raw/ecommerce_churn_raw.csv` and `data/processed/data_dictionary.json`.
-
----
-
-## 8. Milestone 2: EDA & Feature Engineering
-Executed via `python src/eda.py`:
-- Enforces strict zero-leakage protocol: train/test split occurs before any imputation or IQR capping.
-- Soft outlier capping using $3.0 \times \text{IQR}$ to preserve high spenders while bounding extreme noise.
-- Generates 7 visual artifacts in `reports/figures/`.
-
----
-
-## 9. Feature Engineering Formulas
-Five domain behavioral variables are engineered dynamically:
-
-1. **Average Historical Monthly Spend:**
-   $$\text{average\_historical\_monthly\_spend} = \frac{\text{total\_spend}}{\text{tenure\_months} + 1}$$
-2. **Spend Deviation:**
-   $$\text{spend\_deviation} = \text{monthly\_spend} - \text{average\_historical\_monthly\_spend}$$
-3. **Engagement Score:**
-   $$\text{engagement\_score} = \frac{\text{login\_frequency}}{\text{last\_login\_days} + 1}$$
-4. **Support Ticket Intensity:**
-   $$\text{support\_ticket\_intensity} = \frac{\text{support\_tickets}}{\text{tenure\_months} + 1}$$
-5. **Payment Risk Score:**
-   $$\text{payment\_risk\_score} = \text{payment\_delay\_days} \times \text{support\_tickets}$$
-
----
-
-## 10. ML Models
-1. **Baseline Model:** Logistic Regression (`class_weight='balanced'`, `max_iter=1000`).
-2. **Advanced Model:** Tuned Random Forest Classifier trained on SMOTE-balanced training data.
-   - Tuned using 5-fold Stratified K-Fold cross-validation over hyperparameters (`n_estimators`, `max_depth`, `min_samples_split`, `min_samples_leaf`, `max_features`).
-   - Best cross-validation ROC-AUC: **0.9715**.
-
----
-
-## 11. Evaluation Metrics & Rationale
-In imbalanced classification, raw Accuracy is deceptive. A dummy classifier predicting all `0`s achieves **83.8% Accuracy** while capturing **0% of churners** (Recall = 0.0).
-
-Therefore, model selection relies on:
-- **Recall ($\frac{TP}{TP+FN}$):** Captures true churners to prevent catastrophic revenue leakage.
-- **Precision ($\frac{TP}{TP+FP}$):** Minimizes wasted retention incentives on loyal customers.
-- **F1-Score:** Harmonic balance of Precision and Recall.
-- **ROC-AUC & PR-AUC:** Threshold-independent discrimination metrics.
-
----
-
-## 12. Model Comparison & Results
-
-### Verified Test Set Results (Holdout N = 1,000)
-
-| Metric | Baseline: Logistic Regression | Tuned Random Forest | Delta |
-| :--- | :---: | :---: | :---: |
-| **Accuracy** | 0.7200 | **0.8270** | +0.1070 |
-| **Precision** | 0.3397 | **0.4631** | +0.1234 |
-| **Recall (Sensitivity)** | **0.7716** | 0.4259 | -0.3457 |
-| **F1-Score** | **0.4717** | 0.4437 | -0.0280 |
-| **ROC-AUC** | **0.8310** | 0.8016 | -0.0294 |
-| **PR-AUC (Avg Precision)**| **0.5456** | 0.4620 | -0.0836 |
-
-**Selected Model:** `models/best_churn_model.joblib` (Tuned Random Forest Pipeline).
-
----
-
-## 13. API Documentation
-The Flask service runs on `http://127.0.0.1:5000`:
-- `GET /health`: Health status and model readiness.
-- `POST /predict`: Accepts customer JSON, validates schemas, and returns prediction with risk tiering.
-
----
-
-## 14. API Example Request
-```bash
-curl -X POST http://127.0.0.1:5000/predict \
-  -H "Content-Type: application/json" \
-  -d '{
-    "customer_age": 28,
-    "tenure_months": 2,
-    "monthly_spend": 140.00,
-    "total_spend": 280.00,
-    "login_frequency": 3,
-    "support_tickets": 6,
-    "payment_delay_days": 18,
-    "subscription_type": "Basic",
-    "contract_type": "Month-to-Month",
-    "discount_used": 0,
-    "last_login_days": 35
-  }'
+```text
+Customer Dataset
+       │
+       ▼
+Data Cleaning
+       │
+       ▼
+Exploratory Data Analysis
+       │
+       ▼
+Feature Engineering
+       │
+       ▼
+Train / Test Split
+       │
+       ▼
+Preprocessing
+       │
+       ▼
+Class Imbalance Handling
+       │
+       ▼
+Model Training
+       │
+       ├───────────────┐
+       ▼               ▼
+Logistic Regression   Random Forest
+       │               │
+       └───────┬───────┘
+               ▼
+        Model Evaluation
+               │
+               ▼
+        Final Model
+               │
+               ▼
+        API Integration
+               │
+               ▼
+       Customer Risk Prediction
 ```
 
 ---
 
-## 15. API Example Response
+# Machine Learning Models
+
+## 1. Logistic Regression
+
+Logistic Regression is used as the baseline classification model.
+
+It provides a simple and interpretable reference point for evaluating the performance of the more advanced model.
+
+## 2. Random Forest
+
+Random Forest is used as the advanced classification model.
+
+It combines multiple decision trees and can capture nonlinear relationships between customer characteristics and churn behavior.
+
+The project evaluates both models using multiple classification metrics instead of relying only on accuracy.
+
+---
+
+# Model Evaluation
+
+The following evaluation metrics are used:
+
+- Accuracy
+- Precision
+- Recall
+- F1 Score
+- ROC-AUC
+- PR-AUC
+- Confusion Matrix
+
+These metrics provide a broader understanding of model performance, especially when the target classes are imbalanced.
+
+---
+
+# Feature Engineering
+
+The project derives useful customer-level features from the available customer information.
+
+Examples include:
+
+### Average Order Value
+
+```text
+Average Order Value =
+Total Spend / Number of Orders
+```
+
+### Customer Lifetime Value
+
+```text
+Customer Lifetime Value =
+Average Order Value × Purchase Frequency × Customer Lifetime
+```
+
+### Support Intensity
+
+```text
+Support Intensity =
+Support Tickets / Customer Lifetime
+```
+
+### Recency
+
+Customer activity recency is used to understand how recently the customer interacted with the business.
+
+These engineered variables allow the Machine Learning model to capture behavioral patterns more effectively.
+
+---
+
+# Data Processing
+
+The Machine Learning workflow follows controlled preprocessing steps.
+
+The project includes:
+
+- Missing-value handling
+- Numerical feature scaling
+- Categorical feature encoding
+- Train/test separation
+- Class imbalance handling
+- Feature transformation
+- Model serialization
+
+Preprocessing is applied consistently between model training and API inference.
+
+---
+
+# Leakage Prevention
+
+Data leakage was explicitly reviewed during the development process.
+
+The workflow ensures:
+
+- Train/test split occurs before model preprocessing.
+- Imputation parameters are learned from training data.
+- Scaling parameters are learned from training data.
+- Encoding is learned from training data.
+- The final test set remains untouched until evaluation.
+- The target variable is not used as an input feature.
+- API inference uses the same preprocessing logic as training.
+
+Class imbalance handling is applied only to training data.
+
+For cross-validation workflows, imbalance handling should be placed inside the cross-validation pipeline so synthetic samples cannot influence validation folds.
+
+---
+
+# Customer Intelligence Output
+
+For every customer prediction, the application can provide information such as:
+
+```text
+Customer
+   │
+   ├── Churn Probability
+   │
+   ├── Risk Tier
+   │
+   ├── Risk Drivers
+   │
+   └── Protective Signals
+```
+
+Example response structure:
+
 ```json
 {
-  "prediction": 1,
-  "prediction_label": "Likely to Churn",
-  "probability": 0.7067,
-  "risk_tier": "High Risk",
-  "recommendation": "Immediate proactive outreach: Offer retention discount and schedule success manager check-in."
+  "risk_tier": "Critical",
+  "churn_probability": 0.80,
+  "risk_drivers": [
+    "Low customer activity",
+    "High support interaction"
+  ],
+  "protective_signals": [
+    "Recent purchase activity"
+  ]
 }
 ```
 
----
-
-## 16. Automated Testing Instructions
-Run the Pytest suite:
-```bash
-pytest tests/ -v
-```
-**Verification Result:** `8 passed in 3.83s` (100% test pass rate).
+The exact prediction values depend on the customer data supplied to the model.
 
 ---
 
-## 17. Frontend Dashboard Instructions
-Simply open [frontend/index.html](file:///c:/Users/chand/Downloads/aiml/frontend/index.html) in any modern browser.
-- Displays real-time API connection status.
-- Click **Loyal VIP**, **At-Risk Account**, or **Critical Hazard** buttons for instant persona simulations.
-- Adjust sliders and click **Predict Churn Risk** to test real-time predictions.
+# REST API
 
----
+The backend is implemented using Flask.
 
-## 18. Installation & Setup
-```bash
-git clone <repository_url>
-cd aiml
-python -m pip install -r requirements.txt
+## Health Check
+
+```http
+GET /health
 ```
 
----
-
-## 19. Complete Execution Commands
-To execute all milestones in sequence:
+Example:
 
 ```bash
-# 1. Milestone 1: Data Generation
-python src/data_generation.py
+curl http://127.0.0.1:5000/health
+```
 
-# 2. Milestone 2: Exploratory Data Analysis & Visualizations
-python src/eda.py
+The endpoint is used to verify that the API and model service are running correctly.
 
-# 3. Milestone 3: Model Training & Hyperparameter Tuning
-python src/train.py
+---
 
-# 4. Milestone 4: Run Automated Test Suite
-pytest tests/ -v
+## Customer Prediction
 
-# 5. Milestone 4: Launch Flask REST API
+```http
+POST /predict
+```
+
+The endpoint accepts customer information and returns the predicted churn risk.
+
+Example:
+
+```bash
+curl -X POST http://127.0.0.1:5000/predict \
+-H "Content-Type: application/json" \
+-d '{
+  "customer_data": {
+    "example_feature": "example_value"
+  }
+}'
+```
+
+The exact request fields depend on the trained model's feature schema.
+
+---
+
+# Backend Application Structure
+
+The Flask application uses an application factory:
+
+```python
+def create_app():
+    ...
+```
+
+For production WSGI deployment, the application exposes:
+
+```python
+app = create_app()
+```
+
+This allows Gunicorn to load the Flask application using:
+
+```text
+gunicorn api.app:app
+```
+
+The application also reads the deployment port from the environment:
+
+```python
+port = int(os.environ.get("PORT", 5000))
+```
+
+---
+
+# Testing
+
+Automated tests are implemented using Pytest.
+
+The latest backend verification completed successfully with:
+
+```text
+18 of 18 tests passed
+```
+
+The tests verify important API and prediction functionality including:
+
+- Application startup
+- Health endpoint
+- Prediction endpoint
+- Input validation
+- Model loading
+- Response structure
+- Error handling
+
+Run the tests locally with:
+
+```bash
+pytest -q
+```
+
+---
+
+# Project Structure
+
+```text
+customer-intelligence/
+│
+├── api/
+│   ├── app.py
+│   └── ...
+│
+├── data/
+│   └── ...
+│
+├── models/
+│   └── ...
+│
+├── notebooks/
+│   └── ...
+│
+├── frontend/
+│   └── ...
+│
+├── tests/
+│   └── ...
+│
+├── requirements.txt
+├── README.md
+└── ...
+```
+
+The exact contents may evolve as the application is developed.
+
+---
+
+# Technology Stack
+
+## Programming
+
+- Python
+- JavaScript
+- HTML
+- CSS
+
+## Machine Learning
+
+- NumPy
+- Pandas
+- Scikit-learn
+- Imbalanced-learn
+- Joblib
+
+## Backend
+
+- Flask
+- Gunicorn
+
+## Testing
+
+- Pytest
+
+## Development
+
+- Git
+- GitHub
+
+## Deployment
+
+- Render
+
+## Frontend
+
+- HTML
+- CSS
+- JavaScript
+
+---
+
+# Local Setup
+
+## 1. Clone the Repository
+
+```bash
+git clone https://github.com/Chandrashekhar-cloud/customer-intelligence.git
+cd customer-intelligence
+```
+
+## 2. Create a Virtual Environment
+
+Windows:
+
+```bash
+python -m venv venv
+venv\Scripts\activate
+```
+
+Linux / macOS:
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+
+## 3. Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+## 4. Run Tests
+
+```bash
+pytest -q
+```
+
+## 5. Start the Flask API
+
+```bash
 python api/app.py
-
-# 6. Milestone 5: Open Frontend Dashboard
-# Double-click frontend/index.html or run:
-start frontend/index.html
 ```
 
-Or execute the one-click Windows batch runner:
-```cmd
-.\run_project.bat
+The API will run locally on:
+
+```text
+http://127.0.0.1:5000
 ```
 
 ---
 
-## 20. Project Limitations
-- Synthetic data reflects domain assumptions rather than actual live telemetry streams.
-- Static threshold (0.50) can be customized based on financial cost matrix (cost of retention offer vs. cost of lost customer).
-- Single-instance Flask development server (for production, use Gunicorn / uWSGI with Nginx).
+# Production Deployment
+
+The Flask backend is deployed using Render and Gunicorn.
+
+## Build Command
+
+```bash
+pip install -r requirements.txt
+```
+
+## Start Command
+
+```bash
+gunicorn api.app:app
+```
+
+Gunicorn loads the Flask application using:
+
+```text
+api.app:app
+```
+
+where:
+
+- `api` is the Python package
+- `app` is the Python module
+- `app` is the Flask application object
+
+The production server binds to the port provided by Render.
 
 ---
 
-## 21. Future Improvements
-- Implement temporal decay weights for recency.
-- Integrate SHAP (SHapley Additive exPlanations) for real-time feature attribution in the API response.
-- Add automated CI/CD pipeline using GitHub Actions to re-train upon data drift detection.
+# Deployment Status
+
+The backend deployment was successfully verified with:
+
+```text
+Deploy succeeded · Live
+```
+
+Gunicorn successfully starts the Flask application and listens on the Render-provided port.
+
+The production API should be tested using:
+
+```text
+GET /health
+```
+
+and:
+
+```text
+POST /predict
+```
 
 ---
 
-## 22. AI Tools Used & Prompts
-In compliance with the assignment specification:
-1. **Cursor / Copilot Prompt for Data Generation:**
-   > *"Write a synthetic data generation script for e-commerce churn incorporating high class-imbalance (~80/20), missing values across telemetry fields, and correlated behavioral outliers."*
-2. **Claude Code / Aider Prompt for Model Optimization:**
-   > *"Write a leak-free machine learning training script using StratifiedKFold GridSearchCV for Random Forest with SMOTE applied exclusively to the training folds. Serialize the complete inference pipeline via Joblib."*
-3. **v0 / Lovable Prompt for Dashboard:**
-   > *"Create a modern dark-mode SRE/DevOps analytics dashboard with KPI cards, customer persona presets, dynamic probability meters, and REST API integration."*
+# Frontend
+
+The frontend is designed as a premium B2B SaaS-style application rather than a traditional academic dashboard.
+
+The interface focuses on:
+
+- Clean typography
+- Black and white visual language
+- Neutral surfaces
+- Minimal visual noise
+- Clear customer information
+- Risk-focused workflows
+- Responsive layouts
+- Professional enterprise styling
+
+The main application areas are:
+
+```text
+Landing Page
+     │
+     ▼
+Authentication / Workspace
+     │
+     ▼
+Customer Intelligence
+     │
+     ├── Overview
+     │
+     ├── Customers
+     │
+     ├── Assess
+     │
+     ├── Insights
+     │
+     └── System
+```
 
 ---
 
-## 23. Viva & Interview Questions
-1. **Q: Why is data leakage such a critical issue in ML projects?**  
-   *A:* If preprocessing (e.g. mean imputation, standard scaling) or oversampling (SMOTE) is fitted on the whole dataset before splitting, information from the test set leaks into the training process. The model will appear to perform well in testing but fails in real deployment.
+# Product Design Principles
 
-2. **Q: How did you select the best model?**  
-   *A:* While Logistic Regression offered high sensitivity, Random Forest achieved an 82.7% accuracy and 46.3% precision, dramatically reducing costly false alarms (80 false alarms vs 243 false alarms) while achieving a cross-validation ROC-AUC of 0.9715.
+The application follows these principles:
 
-3. **Q: How does the Flask API ensure identical preprocessing as training?**  
-   *A:* The API loads `best_churn_model.joblib`, an instance of `FullChurnInferencePipeline` that encapsulates the exact training-derived median imputer dictionary, IQR capping bounds, and fitted `ColumnTransformer`.
+### 1. Business First
+
+The product should help users understand customer risk rather than simply display Machine Learning outputs.
+
+### 2. Explainability
+
+Predictions should provide understandable supporting information.
+
+### 3. Minimalism
+
+Only useful functionality is included. Unnecessary dashboard widgets and decorative elements are avoided.
+
+### 4. Professional SaaS Experience
+
+The application is designed to resemble a modern B2B software product rather than a basic college project.
+
+### 5. Responsive Design
+
+The interface should remain usable across desktop and mobile screen sizes.
+
+---
+
+# Limitations
+
+The current project has several limitations:
+
+- Customer data may not represent every real-world business environment.
+- Synthetic or benchmark datasets can contain assumptions that do not necessarily generalize to production customers.
+- Churn predictions are statistical estimates rather than guaranteed outcomes.
+- Model performance depends on the quality and distribution of the training data.
+- Business users should validate predictions against real customer context before taking action.
+- The current system focuses on churn-risk prediction rather than complete customer lifecycle management.
+
+---
+
+# Future Improvements
+
+Potential improvements include:
+
+- SHAP-based model explanations
+- Better model monitoring
+- Model version tracking
+- Automated CI/CD
+- Authentication and role-based access
+- Database-backed customer storage
+- Historical customer-risk tracking
+- Advanced customer segmentation
+- More robust production monitoring
+- Scheduled batch predictions
+- Model drift detection
+- Additional Machine Learning models
+- Cloud-native scaling
+
+---
+
+# End-to-End Workflow
+
+```text
+1. Customer data is collected
+             │
+             ▼
+2. Data is cleaned and analyzed
+             │
+             ▼
+3. Features are engineered
+             │
+             ▼
+4. Dataset is split into training and testing data
+             │
+             ▼
+5. Preprocessing is applied
+             │
+             ▼
+6. Machine Learning models are trained
+             │
+             ▼
+7. Models are evaluated
+             │
+             ▼
+8. Final model is serialized
+             │
+             ▼
+9. Flask API loads the model
+             │
+             ▼
+10. Frontend sends customer information
+             │
+             ▼
+11. API generates churn-risk prediction
+             │
+             ▼
+12. Customer Intelligence interface displays
+    probability, risk tier, drivers and signals
+```
+
+---
+
+# Repository
+
+GitHub:
+
+https://github.com/Chandrashekhar-cloud/customer-intelligence
+
+---
+
+# Author
+
+**Chandrashekhar H S**
+
+Computer Science Engineering  
+AI & ML
+
+---
+
+# Project Summary
+
+**Customer Intelligence** demonstrates an end-to-end Machine Learning product workflow, starting from customer data processing and model development and continuing through API development, automated testing, frontend integration, and cloud deployment.
+
+The project combines Machine Learning with software engineering practices to transform customer data into an actionable customer-risk intelligence platform.
+
+---
+
+**Customer Intelligence · © 2026**
+
+**Designed & developed by Chandrashekhar H S**
