@@ -2,10 +2,15 @@
 
 > A production-oriented B2B Customer Intelligence platform that uses Machine Learning to analyze customer behavior, estimate churn risk, explain risk factors, and help business teams prioritize customer retention actions.
 
+[🚀 **Live API**](https://customer-intelligence-ct1h.onrender.com) · [💻 **GitHub Repository**](https://github.com/Chandrashekhar-cloud/customer-intelligence)
+
+---
+
 ## Overview
 
-**Customer Intelligence** is an end-to-end Machine Learning application designed for businesses that want to understand customer behavior and identify accounts that may be at risk of churn.
+**Customer Intelligence** is an end-to-end Machine Learning application designed for businesses to understand customer behavior, identify accounts that may be at risk of churn, and support data-driven customer retention decisions.
 
+The platform combines customer data processing, Machine Learning, explainable risk analysis, REST API services, automated testing, and cloud deployment into a single B2B application.
 The system combines:
 
 - Customer data processing
