@@ -1,0 +1,1697 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Intelligence | Enterprise Retention Analytics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="assets/chart.min.js"></script>
+</head>
+<body>
+
+  <!-- ============================================================
+       1. PUBLIC LANDING PAGE (Entry Point)
+       ============================================================ -->
+  <div class="landing-page" id="landing-view">
+    <!-- Landing Navigation -->
+    <header class="landing-nav">
+      <div class="landing-brand">
+        <div class="brand-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            <polyline points="2 17 12 22 22 17"></polyline>
+            <polyline points="2 12 12 17 22 12"></polyline>
+          </svg>
+        </div>
+        <span class="landing-title">Customer Intelligence</span>
+      </div>
+      <div class="landing-nav-actions">
+        <button class="icon-btn theme-toggle-btn" id="landing-theme-btn" aria-label="Toggle Theme" title="Toggle Light/Dark Theme">
+          <svg class="sun-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          <svg class="moon-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+        <button class="btn btn-ghost" id="landing-nav-signin">Sign In</button>
+        <button class="btn btn-primary" id="landing-nav-workspace">Open Workspace &rarr;</button>
+      </div>
+    </header>
+
+    <!-- Landing Main Content -->
+    <main class="landing-content">
+      <!-- Hero Section -->
+      <section class="landing-hero">
+        <div class="hero-kicker">
+          <span class="kicker-dot"></span>
+          Enterprise Retention Analytics
+        </div>
+        <h1 class="landing-hero-title">Understand your customers<br class="desktop-only" /> before you lose them.</h1>
+        <p class="landing-hero-sub">Customer Intelligence turns customer behavior and account signals into clear retention insights.</p>
+        <div class="landing-cta-row">
+          <button class="btn btn-primary btn-lg" id="landing-hero-open">Open Workspace &rarr;</button>
+          <button class="btn btn-secondary btn-lg" id="landing-hero-demo">Explore Demo Workspace</button>
+        </div>
+
+        <!-- Metric Proof Row -->
+        <div class="hero-metrics-strip">
+          <div class="hero-metric-cell">
+            <span class="hero-metric-val font-mono">5,630</span>
+            <span class="hero-metric-lbl">Customer Accounts</span>
+          </div>
+          <span class="hero-metric-sep">/</span>
+          <div class="hero-metric-cell">
+            <span class="hero-metric-val font-mono text-healthy">64.3%</span>
+            <span class="hero-metric-lbl">Retention Baseline</span>
+          </div>
+          <span class="hero-metric-sep">/</span>
+          <div class="hero-metric-cell">
+            <span class="hero-metric-val font-mono text-hazard">35.7%</span>
+            <span class="hero-metric-lbl">At-Risk Identified</span>
+          </div>
+          <span class="hero-metric-sep">/</span>
+          <div class="hero-metric-cell">
+            <span class="hero-metric-val font-mono">0.962</span>
+            <span class="hero-metric-lbl">ROC-AUC Model</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Live Product Showcase Window (Figma/Linear Quality Component Preview) -->
+      <section class="landing-preview-container">
+        <div class="landing-preview-window">
+          <!-- Window Header Chrome -->
+          <div class="preview-window-chrome">
+            <div class="window-controls">
+              <span class="control-dot"></span>
+              <span class="control-dot"></span>
+              <span class="control-dot"></span>
+            </div>
+            <div class="window-title font-mono">Customer Intelligence · Portfolio Operations (5,630 Records)</div>
+            <div class="window-status-pill">
+              <span class="status-indicator-dot"></span>
+              <span>Production ML Pipeline</span>
+            </div>
+          </div>
+
+          <!-- Inside Workspace Component Showcase -->
+          <div class="preview-window-body">
+            <!-- Full Width Health Segment Bar -->
+            <div class="preview-hero-section">
+              <div class="preview-section-header">
+                <div>
+                  <span class="preview-section-title">Customer Health</span>
+                  <span class="preview-section-sub">Portfolio segmentation across 5,630 authenticated Kaggle accounts</span>
+                </div>
+                <span class="font-mono preview-rate-tag">64.3% Retained · 35.7% At Risk</span>
+              </div>
+
+              <div class="health-segmented-bar" style="height: 12px; margin-bottom: 12px;">
+                <div class="health-segment segment-healthy" style="width: 64.3%;" title="Healthy: 64.3%"></div>
+                <div class="health-segment segment-watch" style="width: 19.8%;" title="Watchlist: 19.8%"></div>
+                <div class="health-segment segment-risk" style="width: 15.9%;" title="High Risk: 15.9%"></div>
+              </div>
+
+              <div class="health-legend">
+                <div class="legend-item"><span class="legend-dot dot-healthy"></span><span class="legend-name">Healthy</span> <span class="legend-value">3,620 (64.3%)</span></div>
+                <div class="legend-item"><span class="legend-dot dot-watch"></span><span class="legend-name">Watchlist</span> <span class="legend-value">1,115 (19.8%)</span></div>
+                <div class="legend-item"><span class="legend-dot dot-risk"></span><span class="legend-name">High Risk</span> <span class="legend-value">895 (15.9%)</span></div>
+              </div>
+            </div>
+
+            <!-- Two Column Split Preview: Attention Queue + Live Evaluation -->
+            <div class="preview-dual-grid">
+              <!-- Left: Work Queue -->
+              <div class="preview-card-box">
+                <div class="preview-box-top">
+                  <span class="preview-box-label">NEEDS YOUR ATTENTION</span>
+                  <span class="preview-badge-sub">High-Risk Prioritization</span>
+                </div>
+                <div class="preview-queue-items">
+                  <div class="preview-queue-row">
+                    <div class="queue-row-left">
+                      <span class="font-mono queue-id">CUST-50001</span>
+                      <span class="badge-hazard">High Risk</span>
+                    </div>
+                    <div class="queue-row-right">
+                      <span class="font-mono text-hazard queue-score">88.4%</span>
+                      <span class="queue-sub">Tenure: 4mo · Complaint Logged</span>
+                    </div>
+                  </div>
+                  <div class="preview-queue-row">
+                    <div class="queue-row-left">
+                      <span class="font-mono queue-id">CUST-50002</span>
+                      <span class="badge-hazard">High Risk</span>
+                    </div>
+                    <div class="queue-row-right">
+                      <span class="font-mono text-hazard queue-score">69.5%</span>
+                      <span class="queue-sub">Tenure: 1mo · Low Sat</span>
+                    </div>
+                  </div>
+                  <div class="preview-queue-row">
+                    <div class="queue-row-left">
+                      <span class="font-mono queue-id">CUST-50003</span>
+                      <span class="badge-hazard">High Risk</span>
+                    </div>
+                    <div class="queue-row-right">
+                      <span class="font-mono text-hazard queue-score">76.5%</span>
+                      <span class="queue-sub">Tenure: 2mo · Inactive 12d</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right: Real-time Evaluation Card -->
+              <div class="preview-card-box">
+                <div class="preview-box-top">
+                  <span class="preview-box-label">RETENTION RISK ASSESSMENT</span>
+                  <span class="font-mono" style="font-size: 11px; color: var(--text-muted);">Real-Time ML</span>
+                </div>
+
+                <div class="preview-eval-hero">
+                  <div class="eval-stat-col">
+                    <span class="eval-stat-caption">Customer Risk</span>
+                    <span class="badge-hazard" style="font-size: 12px; padding: 4px 10px; margin-top: 4px;">HIGH RISK</span>
+                  </div>
+                  <div class="eval-stat-col" style="text-align: right;">
+                    <span class="eval-stat-caption">Risk Score</span>
+                    <span class="font-mono text-hazard eval-hero-score">82.9%</span>
+                  </div>
+                </div>
+
+                <div class="preview-signals-block">
+                  <span class="preview-signals-heading">Identified Key Signals</span>
+                  <ul class="preview-signals-list">
+                    <li>Customer filed official support complaint</li>
+                    <li>Account tenure under 6 months (early churn vulnerability)</li>
+                    <li>Reported customer satisfaction rating: 2 / 5</li>
+                  </ul>
+                </div>
+
+                <div class="preview-rec-box">
+                  <span class="rec-lead">Recommended Action:</span> Initiate proactive CSM check-in and apply retention incentive within 24 hours.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Built for Customer Teams Section -->
+      <section class="landing-teams-section">
+        <div class="section-kicker">ROLE-BASED INTELLIGENCE</div>
+        <h2 class="section-headline">Built for customer teams</h2>
+        <p class="section-subtext">Deliver timely retention interventions with calibrated machine learning signals.</p>
+        
+        <div class="teams-grid">
+          <div class="team-card">
+            <div class="team-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+            </div>
+            <h3 class="team-card-title">Customer Success</h3>
+            <p class="team-card-desc">Identify friction points, track account health trajectories, and intervene proactively before dissatisfaction escalates into churn.</p>
+          </div>
+
+          <div class="team-card">
+            <div class="team-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                <polyline points="9 12 11 14 15 10"></polyline>
+              </svg>
+            </div>
+            <h3 class="team-card-title">Retention</h3>
+            <p class="team-card-desc">Prioritize high-risk customer accounts with calibrated early-warning risk scores and targeted retention action workflows.</p>
+          </div>
+
+          <div class="team-card">
+            <div class="team-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="20" x2="18" y2="10"></line>
+                <line x1="12" y1="20" x2="12" y2="4"></line>
+                <line x1="6" y1="20" x2="6" y2="14"></line>
+              </svg>
+            </div>
+            <h3 class="team-card-title">Analytics</h3>
+            <p class="team-card-desc">Evaluate behavioral drivers, order trends, complaint histories, and engagement telemetry across 5,630 authenticated customer accounts.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Exact 2-Line Footer -->
+    <footer class="app-site-footer">
+      <div class="footer-line-1">Customer Intelligence · © 2026</div>
+      <div class="footer-line-2">Designed &amp; developed by Chandrashekhar H S</div>
+    </footer>
+  </div>
+
+  <!-- ============================================================
+       2. AUTHENTICATION VIEW (Sign In / Create Company Account)
+       ============================================================ -->
+  <div class="auth-page" id="auth-view" style="display: none;">
+    <header class="auth-topbar">
+      <button class="btn btn-ghost btn-sm" id="auth-back-btn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        Back to Overview
+      </button>
+      <button class="icon-btn theme-toggle-btn" id="auth-theme-btn" aria-label="Toggle Theme" title="Toggle Light/Dark Theme">
+        <svg class="sun-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        <svg class="moon-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+      </button>
+    </header>
+
+    <div class="auth-card-wrapper">
+      <div class="auth-card">
+        <div class="auth-header">
+          <div class="brand-icon" style="margin: 0 auto 12px; width: 36px; height: 36px;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+              <polyline points="2 17 12 22 22 17"></polyline>
+              <polyline points="2 12 12 17 22 12"></polyline>
+            </svg>
+          </div>
+          <h2 class="auth-title">Customer Intelligence</h2>
+          <p class="auth-subtitle">Company Workspace Access</p>
+        </div>
+
+        <div class="auth-tabs">
+          <button class="auth-tab active" id="tab-btn-signin" type="button">Sign In</button>
+          <button class="auth-tab" id="tab-btn-create" type="button">Create Company Account</button>
+        </div>
+
+        <!-- Dynamic Auth Alert Banner (Errors / Success notifications) -->
+        <div id="auth-alert-container" style="display: none;"></div>
+
+        <!-- Saved Workspaces / Accounts on this Device -->
+        <div id="saved-accounts-section" class="saved-accounts-section" style="display: none;">
+          <div class="saved-accounts-header">
+            <span class="saved-accounts-title">Saved on this device</span>
+            <button type="button" class="saved-accounts-clear-btn" id="btn-clear-saved-accounts">Clear saved</button>
+          </div>
+          <div class="saved-accounts-list" id="saved-accounts-list">
+            <!-- Rendered dynamically by app.js -->
+          </div>
+        </div>
+
+        <!-- Sign In Form -->
+        <form class="auth-form" id="form-signin" novalidate>
+          <div class="form-field">
+            <label for="signin-email">Work Email</label>
+            <input type="email" id="signin-email" placeholder="name@company.com" autocomplete="email" required />
+          </div>
+          <div class="form-field">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <label for="signin-password">Password</label>
+              <button type="button" class="form-link-btn" id="btn-auth-help">Demo credentials?</button>
+            </div>
+            <div class="password-input-wrap">
+              <input type="password" id="signin-password" placeholder="Enter workspace password" autocomplete="current-password" required />
+              <button type="button" class="password-toggle-btn" id="signin-password-toggle" aria-label="Toggle password visibility">
+                <svg class="eye-open" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                <svg class="eye-closed" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
+              </button>
+            </div>
+          </div>
+          
+          <div class="form-options-row">
+            <label class="form-checkbox-label">
+              <input type="checkbox" id="signin-remember" checked />
+              <span>Remember me on this browser</span>
+            </label>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block btn-lg" id="btn-signin-submit">Sign In to Workspace &rarr;</button>
+          
+          <div class="auth-divider">
+            <span>or</span>
+          </div>
+
+          <button type="button" class="btn btn-secondary btn-block" id="btn-signin-demo">Continue with demo workspace</button>
+        </form>
+
+        <!-- Create Company Account Form -->
+        <form class="auth-form" id="form-create" style="display: none;" novalidate>
+          <div class="form-field">
+            <label for="create-company">Company Name</label>
+            <input type="text" id="create-company" placeholder="e.g. Acme Corporation" autocomplete="organization" required />
+          </div>
+          <div class="form-field">
+            <label for="create-email">Work Email</label>
+            <input type="email" id="create-email" placeholder="name@company.com" autocomplete="email" required />
+          </div>
+          <div class="form-field">
+            <label for="create-role">Your Role / Department</label>
+            <select id="create-role" required>
+              <option value="Customer Success Lead" selected>Customer Success Lead</option>
+              <option value="VP of Customer Retention">VP of Customer Retention</option>
+              <option value="Retention Operations Manager">Retention Operations Manager</option>
+              <option value="Senior Business Analyst">Senior Business Analyst</option>
+              <option value="Executive / Leadership">Executive / Leadership</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="create-password">Password</label>
+            <div class="password-input-wrap">
+              <input type="password" id="create-password" placeholder="Create a password (min 6 characters)" autocomplete="new-password" required minlength="6" />
+              <button type="button" class="password-toggle-btn" id="create-password-toggle" aria-label="Toggle password visibility">
+                <svg class="eye-open" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                <svg class="eye-closed" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
+              </button>
+            </div>
+          </div>
+          <div class="form-options-row">
+            <label class="form-checkbox-label">
+              <input type="checkbox" id="create-remember" checked />
+              <span>Remember workspace on this device</span>
+            </label>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block btn-lg" id="btn-create-submit">Create Company Workspace &rarr;</button>
+          
+          <div class="auth-divider">
+            <span>or</span>
+          </div>
+
+          <button type="button" class="btn btn-secondary btn-block" id="btn-create-demo">Continue with demo workspace</button>
+        </form>
+
+        <div class="auth-footer-note">
+          Internal Enterprise Tool: Used by Customer Success, Retention, and Executive Operations.
+        </div>
+      </div>
+    </div>
+
+    <!-- Exact 2-Line Footer -->
+    <footer class="app-site-footer">
+      <div class="footer-line-1">Customer Intelligence · © 2026</div>
+      <div class="footer-line-2">Designed &amp; developed by Chandrashekhar H S</div>
+    </footer>
+  </div>
+
+  <!-- ============================================================
+       3. COMPANY WORKSPACE (Internal Application Shell)
+       ============================================================ -->
+  <div class="app-shell" id="app-shell" style="display: none;">
+    
+    <!-- Mobile Top Navigation Header -->
+    <header class="mobile-header">
+      <div class="brand">
+        <div class="brand-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            <polyline points="2 17 12 22 22 17"></polyline>
+            <polyline points="2 12 12 17 22 12"></polyline>
+          </svg>
+        </div>
+        <div class="brand-text-col">
+          <span class="mobile-company-title" id="mobile-company-title">DEMO COMPANY</span>
+          <span class="mobile-brand-sub">Customer Intelligence</span>
+        </div>
+      </div>
+      <div class="mobile-actions">
+        <button class="icon-btn theme-toggle-btn" id="mobile-theme-btn" aria-label="Toggle theme" title="Toggle Light/Dark Theme">
+          <svg class="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+        <button class="icon-btn" id="mobile-menu-btn" aria-label="Open navigation menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Sidebar Backdrop (for Mobile) -->
+    <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
+    <!-- Application Sidebar -->
+    <aside class="app-sidebar" id="app-sidebar">
+      <div class="sidebar-header">
+        <a href="#overview" class="brand" id="brand-link">
+          <div class="brand-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+              <polyline points="2 17 12 22 22 17"></polyline>
+              <polyline points="2 12 12 17 22 12"></polyline>
+            </svg>
+          </div>
+          <div class="brand-meta">
+            <span class="company-badge" id="sidebar-company-name">DEMO COMPANY</span>
+            <span class="brand-title">Customer Intelligence</span>
+          </div>
+        </a>
+        <button class="icon-btn desktop-collapse-btn" id="sidebar-collapse-btn" aria-label="Toggle sidebar" title="Collapse sidebar">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Core 5 Views Navigation -->
+      <nav class="sidebar-nav">
+        <button class="nav-btn active" data-view="overview" id="nav-overview">
+          <span class="nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+              <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+          </span>
+          <span class="nav-label">Overview</span>
+        </button>
+
+        <button class="nav-btn" data-view="customers" id="nav-customers">
+          <span class="nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+          </span>
+          <span class="nav-label">Customers</span>
+          <span class="nav-badge" id="nav-customers-count">5,630</span>
+        </button>
+
+        <button class="nav-btn" data-view="assess" id="nav-assess">
+          <span class="nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              <polyline points="9 12 11 14 15 10"></polyline>
+            </svg>
+          </span>
+          <span class="nav-label">Assess</span>
+        </button>
+
+        <button class="nav-btn" data-view="insights" id="nav-insights">
+          <span class="nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="20" x2="18" y2="10"></line>
+              <line x1="12" y1="20" x2="12" y2="4"></line>
+              <line x1="6" y1="20" x2="6" y2="14"></line>
+            </svg>
+          </span>
+          <span class="nav-label">Insights</span>
+        </button>
+
+        <button class="nav-btn" data-view="system" id="nav-system">
+          <span class="nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+              <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+              <line x1="6" y1="6" x2="6.01" y2="6"></line>
+              <line x1="6" y1="18" x2="6.01" y2="18"></line>
+            </svg>
+          </span>
+          <span class="nav-label">System</span>
+        </button>
+      </nav>
+
+      <!-- Sidebar Footer: User Identity & Theme Toggle -->
+      <div class="sidebar-footer">
+        <div class="sidebar-user-block">
+          <div class="user-avatar" id="sidebar-user-avatar">DC</div>
+          <div class="user-details">
+            <span class="user-name" id="sidebar-user-name">Demo Workspace</span>
+            <span class="user-role" id="sidebar-user-role">analyst@company.com</span>
+          </div>
+          <button class="icon-btn signout-btn" id="sidebar-signout-btn" title="Sign Out / Switch Workspace">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+          </button>
+        </div>
+
+        <div class="sidebar-footer-row">
+          <div class="api-status-indicator" id="sidebar-status-indicator" title="Service health">
+            <span class="status-dot"></span>
+            <span class="status-text">API Operational</span>
+          </div>
+
+          <button class="theme-toggle-btn" id="desktop-theme-btn" aria-label="Toggle Light/Dark theme">
+            <svg class="sun-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+            <svg class="moon-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Application Canvas -->
+    <main class="app-main" id="app-main">
+      
+      <!-- Top Workspace Bar -->
+      <header class="workspace-topbar">
+        <div class="topbar-search-wrapper">
+          <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" class="topbar-search-input" id="global-search-input" placeholder="Search customer (e.g. CUST-50001)..." autocomplete="off" />
+          <kbd class="shortcut-hint">/</kbd>
+        </div>
+
+        <div class="topbar-actions">
+          <button class="btn btn-secondary btn-sm" id="topbar-assess-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            Assess Customer
+          </button>
+        </div>
+      </header>
+
+      <!-- View Containers -->
+      <div class="workspace-content">
+        
+        <!-- ============================================================
+             VIEW 1: OVERVIEW (Working Environment)
+             ============================================================ -->
+        <section class="app-view active" id="view-overview">
+          <div class="workspace-header">
+            <h1 class="page-title">Customer Intelligence</h1>
+            <p class="page-subtitle">Understand your customer base and act on the accounts that need attention.</p>
+            
+            <div class="workspace-macro-strip">
+              <div class="macro-stat">
+                <span class="macro-number" id="overview-total-count">5,630</span>
+                <span class="macro-label">customers</span>
+              </div>
+              <span class="macro-divider">·</span>
+              <div class="macro-stat">
+                <span class="macro-number text-healthy" id="overview-retention-rate">64.3%</span>
+                <span class="macro-label">retention</span>
+              </div>
+              <span class="macro-divider">·</span>
+              <div class="macro-stat">
+                <span class="macro-number text-hazard" id="overview-atrisk-rate">35.7%</span>
+                <span class="macro-label">at risk</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 1: Customer Health -->
+          <div class="workspace-section">
+            <div class="section-header">
+              <div>
+                <h2 class="section-title">CUSTOMER HEALTH</h2>
+                <span class="section-note">Segmented customer portfolio breakdown</span>
+              </div>
+            </div>
+
+            <div class="health-bar-container">
+              <div class="health-segmented-bar" id="health-segmented-bar">
+                <div class="health-segment segment-healthy" id="bar-healthy" style="width: 64.3%;" title="Healthy: 64.3%"></div>
+                <div class="health-segment segment-watch" id="bar-watch" style="width: 19.8%;" title="Watchlist: 19.8%"></div>
+                <div class="health-segment segment-risk" id="bar-risk" style="width: 15.9%;" title="High Risk: 15.9%"></div>
+              </div>
+              
+              <div class="health-legend">
+                <div class="legend-item">
+                  <span class="legend-dot dot-healthy"></span>
+                  <span class="legend-name">Healthy</span>
+                  <span class="legend-value font-mono" id="legend-healthy-val">3,620 (64.3%)</span>
+                </div>
+                <div class="legend-item">
+                  <span class="legend-dot dot-watch"></span>
+                  <span class="legend-name">Watchlist</span>
+                  <span class="legend-value font-mono" id="legend-watch-val">1,115 (19.8%)</span>
+                </div>
+                <div class="legend-item">
+                  <span class="legend-dot dot-risk"></span>
+                  <span class="legend-name">High Risk</span>
+                  <span class="legend-value font-mono" id="legend-risk-val">895 (15.9%)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 2: Needs Your Attention -->
+          <div class="workspace-section">
+            <div class="section-header">
+              <div>
+                <h2 class="section-title">NEEDS YOUR ATTENTION</h2>
+                <span class="section-note">High-risk customer accounts requiring team intervention</span>
+              </div>
+            </div>
+
+            <div class="attention-list" id="attention-list">
+              <div class="loading-placeholder">Loading prioritized accounts...</div>
+            </div>
+
+            <div style="margin-top: 14px;">
+              <button class="btn btn-secondary" id="overview-view-all-btn">View all customers &rarr;</button>
+            </div>
+          </div>
+
+          <!-- Section 3: Quick Action -->
+          <div class="workspace-section">
+            <div class="section-header">
+              <h2 class="section-title">QUICK ACTION</h2>
+            </div>
+            <div class="quick-action-strip">
+              <div class="action-strip-content">
+                <div class="action-strip-title">Assess a Customer</div>
+                <div class="action-strip-desc">Evaluate customer behavior and account signals to understand retention risk.</div>
+              </div>
+              <button class="btn btn-primary" id="overview-assess-cta-btn">
+                Assess a Customer &rarr;
+              </button>
+            </div>
+          </div>
+
+          <!-- Exact 2-Line Footer inside Overview workspace -->
+          <footer class="app-site-footer workspace-footer">
+            <div class="footer-line-1">Customer Intelligence · © 2026</div>
+            <div class="footer-line-2">Designed &amp; developed by Chandrashekhar H S</div>
+          </footer>
+        </section>
+
+        <!-- ============================================================
+             VIEW 2: CUSTOMERS DIRECTORY (5,630 Records)
+             ============================================================ -->
+        <section class="app-view" id="view-customers">
+          <div class="workspace-header">
+            <div class="workspace-header-row">
+              <div>
+                <h1 class="page-title">Customers</h1>
+                <p class="page-subtitle">Directory of 5,630 authentic customer accounts with real-time ML churn risk, behavioral signals, and account prioritization.</p>
+              </div>
+              <div class="header-actions">
+                <button class="btn btn-secondary btn-sm" id="btn-export-customers">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                  Export CSV
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Priority Group Quick Filters -->
+          <div class="priority-pills-bar" id="priority-pills-bar">
+            <button class="priority-pill active" data-risk="all">
+              <span class="pill-dot dot-all"></span>
+              All Accounts
+              <span class="pill-count" id="pill-count-all">5,630</span>
+            </button>
+            <button class="priority-pill" data-risk="critical">
+              <span class="pill-dot dot-critical"></span>
+              Critical
+              <span class="pill-count" id="pill-count-critical">899</span>
+            </button>
+            <button class="priority-pill" data-risk="high">
+              <span class="pill-dot dot-high"></span>
+              High Risk
+              <span class="pill-count" id="pill-count-high">72</span>
+            </button>
+            <button class="priority-pill" data-risk="watch">
+              <span class="pill-dot dot-watch"></span>
+              Watch
+              <span class="pill-count" id="pill-count-watch">185</span>
+            </button>
+            <button class="priority-pill" data-risk="healthy">
+              <span class="pill-dot dot-healthy"></span>
+              Healthy
+              <span class="pill-count" id="pill-count-healthy">4,474</span>
+            </button>
+          </div>
+
+          <!-- Filtering & Search Toolbar -->
+          <div class="customers-toolbar">
+            <div class="search-box">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input type="text" id="customers-search-input" placeholder="Search by ID, merchandise category, or payment mode..." autocomplete="off" />
+            </div>
+
+            <!-- Mobile Filters Toggle Button -->
+            <button class="btn btn-secondary btn-sm mobile-filter-toggle-btn" id="mobile-filter-open-btn" type="button">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
+              Filters <span id="mobile-filter-badge" class="filter-badge" style="display:none;">0</span>
+            </button>
+
+            <div class="filter-controls desktop-filter-controls">
+              <select id="filter-risk" class="select-filter" aria-label="Filter by Risk Tier">
+                <option value="all">All Priorities</option>
+                <option value="critical">Critical</option>
+                <option value="high">High Risk</option>
+                <option value="watch">Watch</option>
+                <option value="healthy">Healthy</option>
+              </select>
+
+              <select id="filter-order-cat" class="select-filter" aria-label="Filter by Preferred Category">
+                <option value="all">All Categories</option>
+                <option value="Laptop & Accessory">Laptop &amp; Accessory</option>
+                <option value="Mobile Phone">Mobile Phone</option>
+                <option value="Fashion">Fashion</option>
+                <option value="Grocery">Grocery</option>
+                <option value="Others">Others</option>
+              </select>
+
+              <select id="filter-payment" class="select-filter" aria-label="Filter by Payment Method">
+                <option value="all">All Payments</option>
+                <option value="Debit Card">Debit Card</option>
+                <option value="Credit Card">Credit Card</option>
+                <option value="E wallet">E-Wallet</option>
+                <option value="UPI">UPI</option>
+                <option value="Cash on Delivery">Cash on Delivery</option>
+              </select>
+
+              <select id="filter-tenure" class="select-filter" aria-label="Filter by Tenure Range">
+                <option value="all">All Tenures</option>
+                <option value="0-6">0–6 months</option>
+                <option value="6-12">6–12 months</option>
+                <option value="12-24">12–24 months</option>
+                <option value="24+">24+ months</option>
+              </select>
+
+              <select id="filter-spend" class="select-filter" aria-label="Filter by Spend / Cashback">
+                <option value="all">All Spend</option>
+                <option value="<120">&lt; $120</option>
+                <option value="120-160">$120 – $160</option>
+                <option value="160-200">$160 – $200</option>
+                <option value="200+">$200+</option>
+              </select>
+
+              <select id="filter-complain" class="select-filter" aria-label="Filter by Support & Complaints">
+                <option value="all">All Support</option>
+                <option value="1">Complaint Filed</option>
+                <option value="0">No Complaints</option>
+                <option value="low-sat">Low CSAT (&le; 2)</option>
+              </select>
+
+              <select id="sort-by-select" class="select-filter select-sort" aria-label="Sort Customers">
+                <option value="risk_desc">Sort: Highest Risk</option>
+                <option value="risk_asc">Sort: Lowest Risk</option>
+                <option value="spend_desc">Sort: Highest Spend</option>
+                <option value="tenure_desc">Sort: Longest Tenure</option>
+                <option value="recent_asc">Sort: Most Recent Order</option>
+                <option value="orders_desc">Sort: Most Orders</option>
+                <option value="complain_desc">Sort: Complaints First</option>
+              </select>
+
+              <button class="btn btn-ghost btn-sm" id="clear-filters-btn">Reset</button>
+            </div>
+          </div>
+
+          <!-- Table Meta & Pagination Top Bar -->
+          <div class="table-meta-bar">
+            <span id="table-count-label" class="font-mono">Showing 1–25 of 5,630 customers</span>
+            <div class="table-meta-right">
+              <span class="compare-hint-text desktop-only">Select up to 3 accounts to compare</span>
+              <div class="table-limit-select">
+                <span>Rows:</span>
+                <select id="table-limit" aria-label="Rows per page">
+                  <option value="25" selected>25</option>
+                  <option value="50">50</option>
+                  <option value="100">100</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Desktop Table Layout -->
+          <div class="table-container">
+            <table class="data-table" id="customers-table">
+              <thead>
+                <tr>
+                  <th class="th-checkbox">
+                    <input type="checkbox" id="table-select-all-cb" aria-label="Select all on page for comparison" title="Select for comparison" />
+                  </th>
+                  <th>Customer ID</th>
+                  <th>Priority Tier</th>
+                  <th>Risk Probability</th>
+                  <th>Category</th>
+                  <th>Payment Mode</th>
+                  <th>Tenure</th>
+                  <th>Spend / mo</th>
+                  <th>Key Behavioral Signal</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="customers-table-body">
+                <tr>
+                  <td colspan="10" class="table-loading">Loading Kaggle customer records...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Mobile Cards Layout -->
+          <div class="mobile-customers-list" id="mobile-customers-list"></div>
+
+          <!-- Bottom Pagination Controls -->
+          <div class="pagination-bar">
+            <div class="pagination-info font-mono">
+              Page <span id="current-page-num">1</span> of <span id="total-pages-num">226</span>
+            </div>
+            <div class="pagination-actions">
+              <button class="btn btn-secondary btn-sm" id="pagination-prev-btn" disabled>&larr; Previous</button>
+              <button class="btn btn-secondary btn-sm" id="pagination-next-btn">Next &rarr;</button>
+            </div>
+          </div>
+
+          <!-- Exact 2-Line Footer -->
+          <footer class="app-site-footer workspace-footer">
+            <div class="footer-line-1">Customer Intelligence · © 2026</div>
+            <div class="footer-line-2">Designed &amp; developed by Chandrashekhar H S</div>
+          </footer>
+        </section>
+
+        <!-- ============================================================
+             VIEW 3: ASSESS CUSTOMER (Single & Batch Assessment)
+             ============================================================ -->
+        <section class="app-view" id="view-assess">
+          <div class="workspace-header">
+            <h1 class="page-title">Assess Customer</h1>
+            <p class="page-subtitle">Evaluate customer behavior and account telemetry using the production ML pipeline with explainable risk drivers.</p>
+          </div>
+
+          <!-- Workflow Mode Switcher -->
+          <div class="assess-mode-bar">
+            <button type="button" class="assess-mode-tab active" id="tab-assess-single">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+              Single Customer Assessment
+            </button>
+            <button type="button" class="assess-mode-tab" id="tab-assess-batch">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+              Batch CSV Assessment
+            </button>
+          </div>
+
+          <!-- WORKFLOW A: SINGLE CUSTOMER ASSESSMENT -->
+          <div class="assess-single-view" id="assess-single-container">
+            <!-- Rapid Persona Preset Chips -->
+            <div class="presets-container">
+              <span class="presets-label">Quick Scenarios:</span>
+              <div class="presets-chips">
+                <button type="button" class="chip-btn" id="preset-loyal">Loyal Account</button>
+                <button type="button" class="chip-btn" id="preset-atrisk">At-Risk Account</button>
+                <button type="button" class="chip-btn" id="preset-hazard">Critical Hazard</button>
+                <button type="button" class="chip-btn chip-reset" id="preset-reset">Reset Form</button>
+              </div>
+            </div>
+
+            <div class="assess-workspace-grid">
+              <!-- Employee Input Form -->
+              <form class="assess-form" id="assess-form" novalidate>
+                <!-- Group 1: Customer Profile -->
+                <div class="form-group-section">
+                  <h3 class="form-section-title">Customer Profile</h3>
+                  <div class="form-row">
+                    <div class="form-field">
+                      <label for="input-tenure">Account Tenure (Months)</label>
+                      <input type="number" id="input-tenure" name="tenure" min="0" max="100" value="12" required />
+                    </div>
+                    <div class="form-field">
+                      <label for="input-city">City Tier</label>
+                      <select id="input-city" name="city_tier" required>
+                        <option value="1" selected>Tier 1 (Metro)</option>
+                        <option value="2">Tier 2</option>
+                        <option value="3">Tier 3</option>
+                      </select>
+                    </div>
+                    <div class="form-field">
+                      <label for="input-warehouse">Warehouse Distance (km)</label>
+                      <input type="number" id="input-warehouse" name="warehouse_to_home" min="1" max="120" value="12" required />
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="form-field">
+                      <label for="input-address">Addresses on File</label>
+                      <input type="number" id="input-address" name="number_of_address" min="1" max="25" value="4" required />
+                    </div>
+                    <div class="form-field">
+                      <label for="input-gender">Gender</label>
+                      <select id="input-gender" name="gender" required>
+                        <option value="Female">Female</option>
+                        <option value="Male" selected>Male</option>
+                      </select>
+                    </div>
+                    <div class="form-field">
+                      <label for="input-marital">Marital Status</label>
+                      <select id="input-marital" name="marital_status" required>
+                        <option value="Single">Single</option>
+                        <option value="Married" selected>Married</option>
+                        <option value="Divorced">Divorced</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Group 2: Financial -->
+                <div class="form-group-section">
+                  <h3 class="form-section-title">Financial &amp; Orders</h3>
+                  <div class="form-row">
+                    <div class="form-field">
+                      <label for="input-order-cat">Preferred Order Category</label>
+                      <select id="input-order-cat" name="preferred_order_cat" required>
+                        <option value="Laptop & Accessory" selected>Laptop &amp; Accessory</option>
+                        <option value="Mobile Phone">Mobile Phone</option>
+                        <option value="Fashion">Fashion</option>
+                        <option value="Grocery">Grocery</option>
+                        <option value="Others">Others</option>
+                      </select>
+                    </div>
+                    <div class="form-field">
+                      <label for="input-payment">Preferred Payment Method</label>
+                      <select id="input-payment" name="preferred_payment_mode" required>
+                        <option value="Debit Card" selected>Debit Card</option>
+                        <option value="Credit Card">Credit Card</option>
+                        <option value="E wallet">E-Wallet</option>
+                        <option value="UPI">UPI</option>
+                        <option value="Cash on Delivery">Cash on Delivery</option>
+                      </select>
+                    </div>
+                    <div class="form-field">
+                      <label for="input-cashback">Monthly Cashback ($)</label>
+                      <input type="number" id="input-cashback" name="cashback_amount" min="0" max="1000" step="1" value="180" required />
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="form-field">
+                      <label for="input-orders">Total Lifetime Orders</label>
+                      <input type="number" id="input-orders" name="order_count" min="1" max="50" value="4" required />
+                    </div>
+                    <div class="form-field">
+                      <label for="input-hike">Order Growth Hike (YoY %)</label>
+                      <input type="number" id="input-hike" name="order_amount_hike_from_last_year" min="0" max="100" value="14" required />
+                    </div>
+                    <div class="form-field">
+                      <label for="input-coupons">Coupons Redeemed</label>
+                      <input type="number" id="input-coupons" name="coupon_used" min="0" max="30" value="2" required />
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Group 3: Engagement & Support -->
+                <div class="form-group-section">
+                  <h3 class="form-section-title">App Telemetry &amp; Support</h3>
+                  <div class="form-row">
+                    <div class="form-field">
+                      <label for="input-days-since">Days Since Last Order</label>
+                      <input type="number" id="input-days-since" name="day_since_last_order" min="0" max="60" value="3" required />
+                    </div>
+                    <div class="form-field">
+                      <label for="input-hours">Daily Hours on App</label>
+                      <input type="number" id="input-hours" name="hour_spend_on_app" step="0.5" min="0" max="10" value="3.0" required />
+                    </div>
+                    <div class="form-field">
+                      <label for="input-device-type">Login Device</label>
+                      <select id="input-device-type" name="preferred_login_device" required>
+                        <option value="Mobile Phone" selected>Mobile Phone</option>
+                        <option value="Computer">Computer</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="form-field">
+                      <label for="input-devices">Devices Registered</label>
+                      <input type="number" id="input-devices" name="number_of_device_registered" min="1" max="6" value="3" required />
+                    </div>
+                    <div class="form-field">
+                      <label for="input-sat">Satisfaction Score (1–5)</label>
+                      <select id="input-sat" name="satisfaction_score" required>
+                        <option value="1">1 - Very Dissatisfied</option>
+                        <option value="2">2 - Dissatisfied</option>
+                        <option value="3">3 - Neutral</option>
+                        <option value="4" selected>4 - Satisfied</option>
+                        <option value="5">5 - Highly Satisfied</option>
+                      </select>
+                    </div>
+                    <div class="form-field">
+                      <label for="input-complain">Official Complaint Logged</label>
+                      <select id="input-complain" name="complain" required>
+                        <option value="0" selected>No Complaint Logged</option>
+                        <option value="1">Complaint Logged</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Form Action -->
+                <div class="form-actions">
+                  <button type="submit" class="btn btn-primary btn-block btn-lg" id="btn-run-prediction">
+                    Assess Customer &rarr;
+                  </button>
+                </div>
+              </form>
+
+              <!-- Real-Time Evaluation Result Panel -->
+              <div class="assess-result-panel" id="assess-result-panel">
+                <!-- State A: Placeholder -->
+                <div class="result-placeholder" id="result-placeholder">
+                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                  </svg>
+                  <div class="placeholder-title">Awaiting Customer Parameters</div>
+                  <p class="placeholder-desc">Complete the fields or choose a quick scenario above, then click Assess Customer.</p>
+                </div>
+
+                <!-- State B: Evaluating Indicator -->
+                <div class="result-loading" id="result-loading" style="display: none;">
+                  <div class="spinner"></div>
+                  <span>Evaluating real ML pipeline &amp; tree explainability...</span>
+                </div>
+
+                <!-- State C: Result Card with Explainable Risk -->
+                <div class="result-content" id="result-content" style="display: none;">
+                  <div class="result-badge-row">
+                    <div>
+                      <span class="result-kicker">Current Risk Assessment</span>
+                      <span class="result-badge badge-hazard" id="result-risk-badge">HIGH RISK</span>
+                    </div>
+                    <span class="result-inference-tag font-mono" id="result-latency-tag">14ms latency</span>
+                  </div>
+
+                  <div class="result-hero-scores">
+                    <div class="result-score-block">
+                      <span class="score-label">Churn Probability</span>
+                      <span class="score-value font-mono text-hazard" id="result-risk-score">82.9%</span>
+                    </div>
+                    <div class="result-score-block">
+                      <span class="score-label">Retention Probability</span>
+                      <span class="score-value font-mono text-muted" id="result-retention-prob">17.1%</span>
+                    </div>
+                  </div>
+
+                  <!-- Explainable Risk: Risk Drivers (+) -->
+                  <div class="result-explain-section">
+                    <div class="explain-section-header">
+                      <span class="explain-icon icon-hazard">+</span>
+                      <h4 class="result-section-heading">Key Contributing Risk Drivers</h4>
+                    </div>
+                    <div class="explain-chips-container" id="result-risk-drivers-container">
+                      <!-- Rendered dynamically -->
+                    </div>
+                  </div>
+
+                  <!-- Explainable Risk: Protective Signals (-) -->
+                  <div class="result-explain-section">
+                    <div class="explain-section-header">
+                      <span class="explain-icon icon-healthy">&minus;</span>
+                      <h4 class="result-section-heading">Protective Retention Signals</h4>
+                    </div>
+                    <div class="explain-chips-container" id="result-protective-signals-container">
+                      <!-- Rendered dynamically -->
+                    </div>
+                  </div>
+
+                  <!-- Actionable Recommendation -->
+                  <div class="result-section">
+                    <h4 class="result-section-heading">Model Recommended Action</h4>
+                    <div class="result-recommendation-box" id="result-recommendation-box"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- WORKFLOW B: BATCH CSV CUSTOMER ASSESSMENT -->
+          <div class="assess-batch-view" id="assess-batch-container" style="display: none;">
+            <div class="batch-workspace">
+              <!-- Upload Area -->
+              <div class="batch-upload-box" id="batch-dropzone">
+                <input type="file" id="batch-file-input" accept=".csv" style="display: none;" />
+                <div class="dropzone-icon">
+                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="17 8 12 3 7 8"></polyline>
+                    <line x1="12" y1="3" x2="12" y2="15"></line>
+                  </svg>
+                </div>
+                <div class="dropzone-title">Upload Customer Records CSV</div>
+                <div class="dropzone-desc">Drag and drop your customer CSV file here, or click to browse.</div>
+                <div class="dropzone-actions">
+                  <button type="button" class="btn btn-secondary btn-sm" id="btn-browse-csv">Choose CSV File</button>
+                  <a href="assets/batch_template.csv" download="customer_intelligence_template.csv" class="btn btn-ghost btn-sm" id="btn-download-template">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                    Download CSV Template
+                  </a>
+                </div>
+                <div class="dropzone-hint">Required columns: tenure, preferred_order_cat, satisfaction_score, complain, cashback_amount, day_since_last_order, etc.</div>
+              </div>
+
+              <!-- Validation Feedback Card -->
+              <div class="batch-validation-card" id="batch-validation-card" style="display: none;">
+                <div class="validation-card-header">
+                  <div class="validation-status-left">
+                    <span class="validation-status-pill" id="batch-val-pill">Validating...</span>
+                    <span class="validation-file-name font-mono" id="batch-file-name">filename.csv</span>
+                  </div>
+                  <button type="button" class="btn btn-ghost btn-sm" id="batch-remove-file-btn">Remove</button>
+                </div>
+
+                <div class="validation-metrics-row">
+                  <div class="val-metric"><span class="val-metric-num" id="batch-total-rows">0</span><span class="val-metric-lbl">Total Records</span></div>
+                  <div class="val-metric"><span class="val-metric-num text-healthy" id="batch-valid-rows">0</span><span class="val-metric-lbl">Valid Records</span></div>
+                  <div class="val-metric"><span class="val-metric-num text-hazard" id="batch-error-rows">0</span><span class="val-metric-lbl">Errors</span></div>
+                </div>
+
+                <div class="validation-errors-box" id="batch-errors-box" style="display: none;">
+                  <div class="val-errors-title">Validation Issues:</div>
+                  <ul class="val-errors-list" id="batch-errors-list"></ul>
+                </div>
+
+                <div class="validation-actions-bar">
+                  <button type="button" class="btn btn-primary btn-block btn-lg" id="btn-run-batch-eval" disabled>
+                    Run Real ML Batch Evaluation &rarr;
+                  </button>
+                </div>
+              </div>
+
+              <!-- Batch Processing Spinner -->
+              <div class="batch-loading-card" id="batch-loading-card" style="display: none;">
+                <div class="spinner"></div>
+                <div class="batch-loading-text">Processing records through trained inference pipeline and computing explainability...</div>
+              </div>
+
+              <!-- Batch Results Section -->
+              <div class="batch-results-section" id="batch-results-container" style="display: none;">
+                <div class="batch-results-header">
+                  <div>
+                    <h3 class="batch-results-title">Batch Evaluation Results</h3>
+                    <p class="batch-results-sub" id="batch-results-sub">Processed customer records</p>
+                  </div>
+                  <button type="button" class="btn btn-primary btn-sm" id="btn-export-batch-results">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                    Export Results (CSV)
+                  </button>
+                </div>
+
+                <!-- Summary Metrics Strip -->
+                <div class="batch-summary-strip">
+                  <div class="batch-stat-cell">
+                    <span class="batch-stat-num font-mono" id="batch-stat-total">0</span>
+                    <span class="batch-stat-lbl">Evaluated</span>
+                  </div>
+                  <div class="batch-stat-cell">
+                    <span class="batch-stat-num font-mono text-hazard" id="batch-stat-critical">0</span>
+                    <span class="batch-stat-lbl">Critical</span>
+                  </div>
+                  <div class="batch-stat-cell">
+                    <span class="batch-stat-num font-mono text-hazard" id="batch-stat-high">0</span>
+                    <span class="batch-stat-lbl">High Risk</span>
+                  </div>
+                  <div class="batch-stat-cell">
+                    <span class="batch-stat-num font-mono text-watch" id="batch-stat-watch">0</span>
+                    <span class="batch-stat-lbl">Watch</span>
+                  </div>
+                  <div class="batch-stat-cell">
+                    <span class="batch-stat-num font-mono text-healthy" id="batch-stat-healthy">0</span>
+                    <span class="batch-stat-lbl">Healthy</span>
+                  </div>
+                  <div class="batch-stat-cell">
+                    <span class="batch-stat-num font-mono" id="batch-stat-avg">0.0%</span>
+                    <span class="batch-stat-lbl">Avg Churn Probability</span>
+                  </div>
+                </div>
+
+                <!-- Batch Table Search & Filter Toolbar -->
+                <div class="batch-table-toolbar">
+                  <input type="text" id="batch-search-input" placeholder="Filter batch results by ID, category, or payment mode..." class="search-input-sm" />
+                  <select id="batch-risk-filter" class="select-filter select-sm" aria-label="Filter Batch by Priority">
+                    <option value="all">All Priorities</option>
+                    <option value="critical">Critical</option>
+                    <option value="high risk">High Risk</option>
+                    <option value="watch">Watch</option>
+                    <option value="healthy">Healthy</option>
+                  </select>
+                </div>
+
+                <!-- Batch Results Table -->
+                <div class="table-container">
+                  <table class="data-table" id="batch-results-table">
+                    <thead>
+                      <tr>
+                        <th>Customer ID</th>
+                        <th>Priority Tier</th>
+                        <th>Probability</th>
+                        <th>Tenure</th>
+                        <th>Category</th>
+                        <th>Cashback</th>
+                        <th>Primary Risk Driver</th>
+                        <th>Protective Signal</th>
+                      </tr>
+                    </thead>
+                    <tbody id="batch-table-body"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Exact 2-Line Footer -->
+          <footer class="app-site-footer workspace-footer">
+            <div class="footer-line-1">Customer Intelligence · © 2026</div>
+            <div class="footer-line-2">Designed &amp; developed by Chandrashekhar H S</div>
+          </footer>
+        </section>
+
+        <!-- ============================================================
+             VIEW 4: INSIGHTS (3-4 Focused Visualizations)
+             ============================================================ -->
+        <section class="app-view" id="view-insights">
+          <div class="workspace-header">
+            <h1 class="page-title">Insights</h1>
+            <p class="page-subtitle">Retention risk patterns and behavioral churn drivers across 5,630 authentic customer accounts.</p>
+          </div>
+
+          <div class="insights-grid">
+            
+            <!-- Chart 1: Customer Health Breakdown -->
+            <div class="insight-card">
+              <div class="insight-card-header">
+                <div>
+                  <h3 class="insight-title">Customer Health Distribution</h3>
+                  <p class="insight-subtitle">Portfolio segmentation across 5,630 accounts</p>
+                </div>
+              </div>
+              <div class="chart-container">
+                <canvas id="chart-health"></canvas>
+              </div>
+              <div class="insight-footer-note">
+                <strong>Key Takeaway:</strong> 64.3% of the customer portfolio is retained, while 35.7% represents potential churn risk requiring intervention.
+              </div>
+            </div>
+
+            <!-- Chart 2: Churn by Preferred Order Category -->
+            <div class="insight-card">
+              <div class="insight-card-header">
+                <div>
+                  <h3 class="insight-title">Risk Severity by Order Category</h3>
+                  <p class="insight-subtitle">Churn rate comparison across merchandise departments</p>
+                </div>
+              </div>
+              <div class="chart-container">
+                <canvas id="chart-contract"></canvas>
+              </div>
+              <div class="insight-footer-note">
+                <strong>Key Takeaway:</strong> Mobile Phone shoppers experience elevated attrition (~28%), whereas Laptop and Grocery categories demonstrate high loyalty.
+              </div>
+            </div>
+
+            <!-- Chart 3: Complaints vs Churn -->
+            <div class="insight-card">
+              <div class="insight-card-header">
+                <div>
+                  <h3 class="insight-title">Customer Complaints vs. Churn Rate</h3>
+                  <p class="insight-subtitle">Friction impact on customer attrition propensity</p>
+                </div>
+              </div>
+              <div class="chart-container">
+                <canvas id="chart-delay"></canvas>
+              </div>
+              <div class="insight-footer-note">
+                <strong>Key Takeaway:</strong> Lodging an official complaint triples churn risk (31.7% vs 10.9% for non-complaining accounts).
+              </div>
+            </div>
+
+            <!-- Chart 4: Order Inactivity vs Churn -->
+            <div class="insight-card">
+              <div class="insight-card-header">
+                <div>
+                  <h3 class="insight-title">Order Inactivity vs. Churn Risk</h3>
+                  <p class="insight-subtitle">Churn propensity by days since last completed order</p>
+                </div>
+              </div>
+              <div class="chart-container">
+                <canvas id="chart-engagement"></canvas>
+              </div>
+              <div class="insight-footer-note">
+                <strong>Key Takeaway:</strong> Accounts inactive for >14 days without an order exhibit a 54% churn rate in subsequent cycles.
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Exact 2-Line Footer -->
+          <footer class="app-site-footer workspace-footer">
+            <div class="footer-line-1">Customer Intelligence · © 2026</div>
+            <div class="footer-line-2">Designed &amp; developed by Chandrashekhar H S</div>
+          </footer>
+        </section>
+
+        <!-- ============================================================
+             VIEW 5: SYSTEM & MODEL (Telemetry & Specifications)
+             ============================================================ -->
+        <section class="app-view" id="view-system">
+          <div class="workspace-header">
+            <h1 class="page-title">System</h1>
+            <p class="page-subtitle">Production model parameters, leak-free training protocol, and REST service telemetry.</p>
+          </div>
+
+          <div class="system-specs-grid">
+            
+            <!-- Specs Column 1: Model Architecture -->
+            <div class="spec-card">
+              <h3 class="spec-card-title">Production ML Architecture</h3>
+              <div class="spec-list">
+                <div class="spec-row">
+                  <span class="spec-name">Primary Model</span>
+                  <span class="spec-value">Tuned Random Forest Classifier</span>
+                </div>
+                <div class="spec-row">
+                  <span class="spec-name">Artifact Path</span>
+                  <span class="spec-value font-mono">models/best_churn_model.joblib</span>
+                </div>
+                <div class="spec-row">
+                  <span class="spec-name">Class Balancing</span>
+                  <span class="spec-value">SMOTE (Applied exclusively to train folds)</span>
+                </div>
+                <div class="spec-row">
+                  <span class="spec-name">Preprocessing</span>
+                  <span class="spec-value font-mono">ColumnTransformer + OneHotEncoder</span>
+                </div>
+                <div class="spec-row">
+                  <span class="spec-name">Cross-Validation</span>
+                  <span class="spec-value">Stratified 5-Fold Protocol</span>
+                </div>
+                <div class="spec-row">
+                  <span class="spec-name">ROC-AUC Score</span>
+                  <span class="spec-value text-healthy font-mono">0.9620</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Specs Column 2: Service & Dataset -->
+            <div class="spec-card">
+              <h3 class="spec-card-title">API & Dataset Telemetry</h3>
+              <div class="spec-list">
+                <div class="spec-row">
+                  <span class="spec-name">REST Service</span>
+                  <span class="spec-value font-mono">Flask 3.0 / Python 3.12</span>
+                </div>
+                <div class="spec-row">
+                  <span class="spec-name">API Health Endpoint</span>
+                  <span class="spec-value font-mono">http://127.0.0.1:5000/health</span>
+                </div>
+                <div class="spec-row">
+                  <span class="spec-name">Dataset Origin</span>
+                  <span class="spec-value">Kaggle E-Commerce Customer Churn</span>
+                </div>
+                <div class="spec-row">
+                  <span class="spec-name">Total Kaggle Records</span>
+                  <span class="spec-value font-mono">5,630 authentic accounts</span>
+                </div>
+                <div class="spec-row">
+                  <span class="spec-name">Service Status</span>
+                  <span class="spec-value text-healthy" id="system-status-val">Operational</span>
+                </div>
+                <div class="spec-row">
+                  <span class="spec-name">Active Inference Model</span>
+                  <span class="spec-value" id="system-model-val">Loaded (Kaggle Pipeline)</span>
+                </div>
+                <div class="spec-row">
+                  <span class="spec-name">Average Inference Latency</span>
+                  <span class="spec-value font-mono" id="system-latency-val">~12ms</span>
+                </div>
+              </div>
+              <div class="spec-actions">
+                <button class="btn btn-secondary btn-sm btn-block" id="system-ping-btn">
+                  Test Health Endpoint
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Exact 2-Line Footer -->
+          <footer class="app-site-footer workspace-footer">
+            <div class="footer-line-1">Customer Intelligence · © 2026</div>
+            <div class="footer-line-2">Designed &amp; developed by Chandrashekhar H S</div>
+          </footer>
+        </section>
+
+      </div>
+    </main>
+
+    <!-- ============================================================
+         CUSTOMER 360° PROFILE DRAWER
+         ============================================================ -->
+    <div class="drawer-backdrop" id="drawer-backdrop"></div>
+    
+    <aside class="customer-drawer" id="customer-drawer" aria-label="Customer 360 Profile">
+      <div class="drawer-header">
+        <div class="drawer-header-left">
+          <div class="drawer-id-row">
+            <span class="drawer-customer-id" id="drawer-id">CUST-50001</span>
+            <span class="drawer-risk-badge badge-hazard" id="drawer-badge">CRITICAL</span>
+          </div>
+          <span class="drawer-sub-id" id="drawer-sub-info">Authentic Kaggle E-Commerce Record</span>
+        </div>
+        <div class="drawer-header-actions">
+          <button class="btn btn-secondary btn-sm drawer-compare-toggle-btn" id="drawer-compare-toggle-btn" title="Add to Account Comparison">
+            + Compare
+          </button>
+          <button class="icon-btn" id="drawer-close-btn" aria-label="Close customer profile">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="drawer-body">
+        <!-- 1. Risk Assessment & Explainable Attribution Section -->
+        <div class="c360-section c360-risk-section">
+          <div class="c360-section-title-row">
+            <h4 class="c360-section-title">Current Risk Assessment</h4>
+            <span class="c360-pill-tag font-mono" id="drawer-risk-rate-tag">88.4% Churn Risk</span>
+          </div>
+
+          <div class="drawer-hero-scores">
+            <div class="drawer-score-card">
+              <span class="drawer-score-label">Churn Probability</span>
+              <span class="drawer-score-number text-hazard font-mono" id="drawer-risk-score">88.4%</span>
+            </div>
+            <div class="drawer-score-card">
+              <span class="drawer-score-label">Retention Probability</span>
+              <span class="drawer-score-number text-healthy font-mono" id="drawer-retention-prob">11.6%</span>
+            </div>
+          </div>
+
+          <!-- Tree Explainability: Contributing Risk Drivers -->
+          <div class="c360-explain-group">
+            <span class="c360-explain-label"><span class="sign-icon hazard-sign">+</span> Contributing Risk Drivers</span>
+            <div class="c360-chips-list" id="drawer-risk-drivers-list">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+
+          <!-- Tree Explainability: Protective Signals -->
+          <div class="c360-explain-group">
+            <span class="c360-explain-label"><span class="sign-icon healthy-sign">&minus;</span> Protective Retention Signals</span>
+            <div class="c360-chips-list" id="drawer-protective-signals-list">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+
+          <!-- CSM Actionable Recommendation -->
+          <div class="c360-recommendation-block" id="drawer-recommendation-box">
+            Proactive retention outreach recommended.
+          </div>
+        </div>
+
+        <!-- 2. Account & Demographic Information -->
+        <div class="c360-section">
+          <h4 class="c360-section-title">Account Information</h4>
+          <div class="c360-data-grid">
+            <div class="c360-data-item">
+              <span class="c360-label">Account Tenure</span>
+              <span class="c360-val font-mono" id="drawer-tenure">4 months</span>
+            </div>
+            <div class="c360-data-item">
+              <span class="c360-label">Metropolitan Tier</span>
+              <span class="c360-val" id="drawer-city">Tier 3 Metro</span>
+            </div>
+            <div class="c360-data-item">
+              <span class="c360-label">Gender</span>
+              <span class="c360-val" id="drawer-gender">Female</span>
+            </div>
+            <div class="c360-data-item">
+              <span class="c360-label">Marital Status</span>
+              <span class="c360-val" id="drawer-marital">Single</span>
+            </div>
+            <div class="c360-data-item">
+              <span class="c360-label">Registered Addresses</span>
+              <span class="c360-val font-mono" id="drawer-address-count">9 locations</span>
+            </div>
+            <div class="c360-data-item">
+              <span class="c360-label">Warehouse Distance</span>
+              <span class="c360-val font-mono" id="drawer-warehouse">6.0 km</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Commercial & Spend Telemetry -->
+        <div class="c360-section">
+          <h4 class="c360-section-title">Commercial &amp; Spend Behavior</h4>
+          <div class="c360-data-grid">
+            <div class="c360-data-item">
+              <span class="c360-label">Monthly Spend / Loyalty</span>
+              <span class="c360-val font-mono" id="drawer-monthly-spend">$199.91 / mo</span>
+            </div>
+            <div class="c360-data-item">
+              <span class="c360-label">Estimated Total Spend</span>
+              <span class="c360-val font-mono" id="drawer-total-spend">$799.64</span>
+            </div>
+            <div class="c360-data-item">
+              <span class="c360-label">Completed Purchase Orders</span>
+              <span class="c360-val font-mono" id="drawer-orders">1 order</span>
+            </div>
+            <div class="c360-data-item">
+              <span class="c360-label">Promotional Cashback</span>
+              <span class="c360-val font-mono" id="drawer-cashback">$159.93</span>
+            </div>
+            <div class="c360-data-item">
+              <span class="c360-label">Year-over-Year Growth Hike</span>
+              <span class="c360-val font-mono" id="drawer-hike">+11.0%</span>
+            </div>
+            <div class="c360-data-item">
+              <span class="c360-label">Coupons Redeemed</span>
+              <span class="c360-val font-mono" id="drawer-coupons">1 used</span>
+            </div>
+            <div class="c360-data-item">
+              <span class="c360-label">Preferred Order Category</span>
+              <span class="c360-val" id="drawer-order-cat">Laptop &amp; Accessory</span>
+            </div>
+            <div class="c360-data-item">
+              <span class="c360-label">Preferred Payment Mode</span>
+              <span class="c360-val" id="drawer-payment">Debit Card</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Platform Activity & Telemetry -->
+        <div class="c360-section">
+          <h4 class="c360-section-title">Login &amp; Activity Behavior</h4>
+          <div class="c360-data-grid">
+            <div class="c360-data-item">
+              <span class="c360-label">Primary Login Device</span>
+              <span class="c360-val" id="drawer-device">Mobile Phone</span>
+            </div>
+            <div class="c360-data-item">
+              <span class="c360-label">Connected Devices</span>
+              <span class="c360-val font-mono" id="drawer-devices-registered">3 registered</span>
+            </div>
+            <div class="c360-data-item">
+              <span class="c360-label">Daily Screen Time</span>
+              <span class="c360-val font-mono" id="drawer-hours">3.0 hrs/day</span>
+            </div>
+            <div class="c360-data-item">
+              <span class="c360-label">Last Order Activity</span>
+              <span class="c360-val font-mono" id="drawer-days-since">5 days ago</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. Support & Satisfaction -->
+        <div class="c360-section">
+          <h4 class="c360-section-title">Support Activity &amp; CSAT</h4>
+          <div class="c360-data-grid">
+            <div class="c360-data-item">
+              <span class="c360-label">Official Complaint Filed</span>
+              <span class="c360-val text-hazard font-mono" id="drawer-complain">Yes (Logged)</span>
+            </div>
+            <div class="c360-data-item">
+              <span class="c360-label">CSAT Satisfaction Score</span>
+              <span class="c360-val font-mono" id="drawer-sat">2 / 5</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Drawer Action Footer -->
+      <div class="drawer-footer">
+        <button class="btn btn-secondary" id="drawer-compare-btn">
+          Compare Account
+        </button>
+        <button class="btn btn-primary" id="drawer-assess-btn">
+          Assess in Simulator &rarr;
+        </button>
+      </div>
+    </aside>
+
+    <!-- ============================================================
+         FLOATING COMPARISON SELECTION BAR
+         ============================================================ -->
+    <div class="comparison-floating-bar" id="comparison-floating-bar" style="display: none;">
+      <div class="comp-bar-content">
+        <div class="comp-bar-left">
+          <span class="comp-bar-badge" id="comp-selected-count">0</span>
+          <span class="comp-bar-label">accounts selected for comparison</span>
+          <span class="comp-bar-hint desktop-only">(max 3)</span>
+        </div>
+        <div class="comp-bar-right">
+          <button type="button" class="btn btn-ghost btn-sm" id="btn-comp-clear">Clear</button>
+          <button type="button" class="btn btn-primary btn-sm" id="btn-comp-open">Compare Accounts &rarr;</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================================
+         CUSTOMER COMPARISON MODAL
+         ============================================================ -->
+    <div class="comparison-modal-backdrop" id="comparison-backdrop" style="display: none;"></div>
+    
+    <div class="comparison-modal" id="comparison-modal" style="display: none;" role="dialog" aria-label="Customer Comparison">
+      <div class="comp-modal-header">
+        <div>
+          <h3 class="comp-modal-title">Customer Account Comparison</h3>
+          <p class="comp-modal-sub">Side-by-side behavioral telemetry, spend profile, and ML risk drivers</p>
+        </div>
+        <button type="button" class="icon-btn" id="comp-modal-close-btn" aria-label="Close comparison">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="comp-modal-body" id="comp-modal-grid">
+        <!-- Rendered dynamically for 2 or 3 customers -->
+      </div>
+    </div>
+
+    <!-- ============================================================
+         MOBILE FILTERS BOTTOM SHEET / DRAWER
+         ============================================================ -->
+    <div class="mobile-filter-backdrop" id="mobile-filter-backdrop" style="display: none;"></div>
+    
+    <div class="mobile-filter-sheet" id="mobile-filter-sheet" style="display: none;">
+      <div class="sheet-handle"></div>
+      <div class="sheet-header">
+        <span class="sheet-title">Filter Customers</span>
+        <button type="button" class="icon-btn" id="mobile-filter-close-btn" aria-label="Close filters">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="sheet-body" id="mobile-filter-sheet-body">
+        <!-- Mobile duplicate filter controls container -->
+      </div>
+      <div class="sheet-footer">
+        <button type="button" class="btn btn-secondary btn-block" id="mobile-filter-reset-btn">Reset All</button>
+        <button type="button" class="btn btn-primary btn-block" id="mobile-filter-apply-btn">Apply Filters</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
+

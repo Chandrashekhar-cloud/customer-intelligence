@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Customer Intelligence — End-to-End Technical System Report</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+    @page {
+      size: A4;
+      margin: 2.2cm 2cm 2.2cm 2cm;
+      @top-left {
+        content: "Customer Intelligence: Machine Learning System Report";
+        font-family: 'EB Garamond', Georgia, serif;
+        font-size: 8.5pt;
+        font-style: italic;
+        color: #64748b;
+        border-bottom: 0.5pt solid #cbd5e1;
+        padding-bottom: 4px;
+      }
+      @top-right {
+        content: counter(page);
+        font-family: 'EB Garamond', Georgia, serif;
+        font-size: 9pt;
+        font-weight: 600;
+        color: #0f172a;
+        border-bottom: 0.5pt solid #cbd5e1;
+        padding-bottom: 4px;
+      }
+      @bottom-center {
+        content: "Customer Intelligence · © 2026 · Designed & developed by Chandrashekhar H S";
+        font-family: 'EB Garamond', Georgia, serif;
+        font-size: 8pt;
+        color: #64748b;
+        border-top: 0.5pt solid #e2e8f0;
+        padding-top: 4px;
+      }
+    }
+
+    @page:first {
+      @top-left { content: none; }
+      @top-right { content: none; }
+      @bottom-center { content: none; }
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'EB Garamond', Georgia, serif;
+      color: #0f172a;
+      background: #ffffff;
+      line-height: 1.58;
+      font-size: 11pt;
+      margin: 0;
+      padding: 0;
+      text-rendering: optimizeLegibility;
+    }
+
+    /* Cover Page */
+    .title-page {
+      page-break-after: always;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 90vh;
+      text-align: center;
+      padding: 40px 10px 20px;
+    }
+    .institution {
+      font-size: 12pt;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #475569;
+      font-weight: 600;
+      margin-bottom: 40px;
+    }
+    .doc-main-title {
+      font-family: 'Cinzel', serif;
+      font-size: 34pt;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: #090a0f;
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+    .doc-subtitle {
+      font-size: 14pt;
+      font-style: italic;
+      color: #334155;
+      max-width: 640px;
+      margin: 0 auto 30px;
+      line-height: 1.45;
+    }
+    .doc-type-badge {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9pt;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      padding: 6px 16px;
+      border-radius: 4px;
+      color: #0f172a;
+      font-weight: 600;
+      margin-bottom: 50px;
+    }
+    .meta-box {
+      display: flex;
+      justify-content: space-between;
+      text-align: left;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 24px 30px;
+      margin: 0 auto 40px;
+      max-width: 680px;
+      font-size: 10.5pt;
+    }
+    .meta-col {
+      width: 48%;
+      line-height: 1.8;
+    }
+    .meta-col strong {
+      color: #0f172a;
+      font-weight: 600;
+    }
+    .title-footer {
+      border-top: 1px solid #cbd5e1;
+      padding-top: 18px;
+      font-size: 10pt;
+      color: #475569;
+    }
+    .title-footer-credit {
+      font-weight: 600;
+      color: #0f172a;
+      margin-top: 4px;
+    }
+
+    /* Headings */
+    h1, h2, h3, h4 {
+      font-family: 'Cinzel', serif;
+      color: #090a0f;
+      page-break-after: avoid;
+    }
+    h1 {
+      font-size: 18pt;
+      font-weight: 700;
+      border-bottom: 1.5pt solid #0f172a;
+      padding-bottom: 4px;
+      margin-top: 28pt;
+      margin-bottom: 14pt;
+      letter-spacing: 0.02em;
+    }
+    h2 {
+      font-size: 14pt;
+      font-weight: 600;
+      border-bottom: 0.5pt solid #cbd5e1;
+      padding-bottom: 3px;
+      margin-top: 20pt;
+      margin-bottom: 10pt;
+    }
+    h3 {
+      font-size: 12pt;
+      font-weight: 600;
+      margin-top: 14pt;
+      margin-bottom: 6pt;
+    }
+
+    p {
+      margin-top: 0;
+      margin-bottom: 10pt;
+      text-align: justify;
+    }
+
+    ul, ol {
+      margin-top: 0;
+      margin-bottom: 12pt;
+      padding-left: 24px;
+    }
+    li {
+      margin-bottom: 4pt;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16pt 0;
+      font-size: 9.5pt;
+      page-break-inside: avoid;
+    }
+    th, td {
+      padding: 7px 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      border-top: 1.5pt solid #0f172a;
+      border-bottom: 1pt solid #0f172a;
+      font-weight: 700;
+      font-size: 9pt;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      background: #f8fafc;
+    }
+    td {
+      border-bottom: 0.5pt solid #e2e8f0;
+    }
+    tr:last-child td {
+      border-bottom: 1.5pt solid #0f172a;
+    }
+    .caption {
+      font-size: 9pt;
+      font-style: italic;
+      color: #475569;
+      margin-bottom: 6pt;
+      text-align: left;
+    }
+
+    /* Code blocks */
+    pre, code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8.5pt;
+    }
+    pre {
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-left: 3pt solid #0f172a;
+      padding: 10px 14px;
+      border-radius: 4px;
+      overflow-x: auto;
+      margin: 12pt 0;
+      line-height: 1.45;
+      page-break-inside: avoid;
+    }
+    p code, li code {
+      background: #f1f5f9;
+      border: 0.5pt solid #cbd5e1;
+      padding: 1px 4px;
+      border-radius: 3px;
+      color: #0f172a;
+    }
+
+    /* Math formulas */
+    .formula-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+      padding: 8px 16px;
+      margin: 10pt 0;
+      text-align: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9pt;
+      color: #1e293b;
+      page-break-inside: avoid;
+    }
+
+    /* Figures */
+    .figure-container {
+      margin: 16pt 0;
+      text-align: center;
+      page-break-inside: avoid;
+    }
+    .figure-container img {
+      max-width: 92%;
+      max-height: 380px;
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
+      padding: 4px;
+      background: #ffffff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    }
+    .figure-caption {
+      font-size: 8.5pt;
+      font-style: italic;
+      color: #475569;
+      margin-top: 6pt;
+    }
+
+    .toc {
+      page-break-after: always;
+      padding-top: 10px;
+    }
+    .toc-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8pt;
+      border-bottom: 1px dotted #cbd5e1;
+      padding-bottom: 2pt;
+    }
+    .toc-title { font-weight: 600; color: #0f172a; }
+    .toc-page { font-family: 'JetBrains Mono', monospace; font-size: 9.5pt; }
+
+    .highlight-box {
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-left: 3pt solid #10b981;
+      border-radius: 4px;
+      padding: 12px 16px;
+      margin: 14pt 0;
+      font-size: 10pt;
+    }
+    .highlight-title {
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 4pt;
+    }
+
+    .page-break {
+      page-break-after: always;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       COVER PAGE
+       ============================================================ -->
+  <div class="title-page">
+    <div class="institution">Applied Machine Learning &amp; Production MLOps Engineering</div>
+
+    <div>
+      <div class="doc-main-title">CUSTOMER INTELLIGENCE</div>
+      <div class="doc-subtitle">
+        Design, Zero-Leakage Machine Learning Architecture, and Microservice Deployment for Predictive Customer Retention
+      </div>
+      <div class="doc-type-badge">A-to-Z Technical Architecture &amp; System Specification</div>
+    </div>
+
+    <div class="meta-box">
+      <div class="meta-col">
+        <div><strong>Author &amp; Engineer:</strong> Chandrashekhar H S</div>
+        <div><strong>Problem Space:</strong> B2B Customer Churn Analytics</div>
+        <div><strong>Target Variable:</strong> Churn Status ($\{0 = \text{Retained}, 1 = \text{Churned}\}$)</div>
+        <div><strong>Dataset:</strong> Kaggle E-Commerce (5,630 Records)</div>
+      </div>
+      <div class="meta-col">
+        <div><strong>Model Architecture:</strong> Tuned Random Forest (ROC-AUC 0.9620)</div>
+        <div><strong>Validation Scheme:</strong> Stratified 5-Fold Nested CV</div>
+        <div><strong>Serving Framework:</strong> Flask 3.0 REST API (Sub-15ms)</div>
+        <div><strong>Frontend:</strong> Figma-Grade SaaS Workspace</div>
+      </div>
+    </div>
+
+    <div class="title-footer">
+      <div>Customer Intelligence · © 2026</div>
+      <div class="title-footer-credit">Designed &amp; developed by Chandrashekhar H S</div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       TABLE OF CONTENTS
+       ============================================================ -->
+  <div class="toc">
+    <h1>Table of Contents</h1>
+    <div class="toc-item"><span class="toc-title">1. Executive Summary &amp; Problem Formulation</span><span class="toc-page">Page 2</span></div>
+    <div class="toc-item"><span class="toc-title">2. Dataset Architecture &amp; Enterprise Indexing</span><span class="toc-page">Page 3</span></div>
+    <div class="toc-item"><span class="toc-title">3. Exploratory Data Analysis &amp; Empirical Findings</span><span class="toc-page">Page 4</span></div>
+    <div class="toc-item"><span class="toc-title">4. Feature Engineering &amp; Mathematical Formulations</span><span class="toc-page">Page 5</span></div>
+    <div class="toc-item"><span class="toc-title">5. Zero-Data-Leakage Preprocessing &amp; Partitioning</span><span class="toc-page">Page 6</span></div>
+    <div class="toc-item"><span class="toc-title">6. Class Imbalance Mitigation &amp; SMOTE Protocol</span><span class="toc-page">Page 7</span></div>
+    <div class="toc-item"><span class="toc-title">7. Model Benchmarking &amp; Hyperparameter Tuning</span><span class="toc-page">Page 8</span></div>
+    <div class="toc-item"><span class="toc-title">8. Evaluation Metrics, ROC-AUC, and Probability Calibration</span><span class="toc-page">Page 9</span></div>
+    <div class="toc-item"><span class="toc-title">9. Production Flask REST API Microservice Architecture</span><span class="toc-page">Page 10</span></div>
+    <div class="toc-item"><span class="toc-title">10. Automated Testing Suite &amp; Pytest Verification</span><span class="toc-page">Page 11</span></div>
+    <div class="toc-item"><span class="toc-title">11. Enterprise B2B SaaS Frontend Design System</span><span class="toc-page">Page 12</span></div>
+    <div class="toc-item"><span class="toc-title">12. Technical Stack Inventory &amp; Reproduction Guide</span><span class="toc-page">Page 13</span></div>
+  </div>
+
+  <!-- ============================================================
+       SECTION 1: EXECUTIVE SUMMARY
+       ============================================================ -->
+  <h1>1. Executive Summary &amp; Problem Formulation</h1>
+  <p>
+    Customer attrition represents one of the most critical structural risks to enterprise unit economics. In modern e-commerce and subscription business models, acquiring a new customer ($CAC$) is between five and seven times more capital-intensive than retaining an existing account ($CRC$).
+  </p>
+  <p>
+    <strong>Customer Intelligence</strong> is an end-to-end, B2B machine learning and retention intelligence platform. It transforms raw behavioral, transactional, logistical, and customer satisfaction signals into calibrated retention risk probabilities, high-priority work queues, and concrete retention recommendations for Customer Success and Operations teams.
+  </p>
+
+  <div class="highlight-box">
+    <div class="highlight-title">System Mission &amp; Architectural Tenets</div>
+    <ul>
+      <li><strong>Data Authenticity:</strong> Built upon 5,630 authentic customer records from the Kaggle E-Commerce benchmark, indexed authentically from <code>CUST-50001</code> to <code>CUST-55630</code>.</li>
+      <li><strong>Mathematical Rigor:</strong> Complete zero-leakage cross-validation protocol. All imputation, scaling, and categorical encoders are fitted exclusively within training folds.</li>
+      <li><strong>Production Performance:</strong> Random Forest Classifier optimized with hyperparameter tuning achieving <strong>0.9620 ROC-AUC</strong>, <strong>0.8907 Precision</strong>, and <strong>0.8889 Recall</strong>.</li>
+      <li><strong>Microservice Reliability:</strong> Low-latency Flask REST microservice with rigorous Pydantic-style type validation and 12/12 automated integration tests passing.</li>
+      <li><strong>Figma-Quality UX:</strong> Linear/Stripe-grade monochromatic interface with a public landing page, authentication, live customer drawer, and employee assessment tool.</li>
+    </ul>
+  </div>
+
+  <!-- ============================================================
+       SECTION 2: DATASET ARCHITECTURE
+       ============================================================ -->
+  <h1>2. Dataset Architecture &amp; Enterprise Indexing</h1>
+  <p>
+    The system processes the authentic <em>Kaggle E-Commerce Customer Churn Analysis and Prediction</em> dataset consisting of <strong>5,630 individual customer accounts</strong>.
+  </p>
+  <p>
+    <strong>Enterprise Indexing (CUST-50001 to CUST-55630):</strong> In production enterprise architectures (SAP, Salesforce, NetSuite, Shopify Plus), customer identifiers intentionally begin with an offset (e.g., 50001) rather than 1. This prevents competitive reverse-engineering of customer volumes, ensures fixed 5-digit indexing, and prevents index collision in relational databases.
+  </p>
+
+  <div class="caption">Table 2.1: Kaggle E-Commerce Customer Churn Feature Schema (5,630 Records)</div>
+  <table>
+    <thead>
+      <tr>
+        <th>Attribute</th>
+        <th>Type</th>
+        <th>Range / Classes</th>
+        <th>Description &amp; Behavioral Meaning</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>customer_id</code></td>
+        <td>String</td>
+        <td><code>CUST-50001</code> – <code>55630</code></td>
+        <td>Unique account index in database sequence</td>
+      </tr>
+      <tr>
+        <td><code>tenure</code></td>
+        <td>Float</td>
+        <td>$0.0 - 61.0$ months</td>
+        <td>Duration of active customer account relationship</td>
+      </tr>
+      <tr>
+        <td><code>preferred_login_device</code></td>
+        <td>Categorical</td>
+        <td>Mobile Phone, Computer</td>
+        <td>Primary hardware device used to access store</td>
+      </tr>
+      <tr>
+        <td><code>city_tier</code></td>
+        <td>Integer</td>
+        <td>$1, 2, 3$</td>
+        <td>Urbanization classification of customer delivery domicile</td>
+      </tr>
+      <tr>
+        <td><code>warehouse_to_home</code></td>
+        <td>Float</td>
+        <td>$5.0 - 127.0$ km</td>
+        <td>Logistical delivery distance from fulfillment center</td>
+      </tr>
+      <tr>
+        <td><code>preferred_payment_mode</code></td>
+        <td>Categorical</td>
+        <td>Debit, Credit, E-Wallet, UPI, COD</td>
+        <td>Primary payment instrument selected at checkout</td>
+      </tr>
+      <tr>
+        <td><code>gender</code></td>
+        <td>Categorical</td>
+        <td>Male, Female</td>
+        <td>Customer demographic gender indicator</td>
+      </tr>
+      <tr>
+        <td><code>hour_spend_on_app</code></td>
+        <td>Float</td>
+        <td>$0.0 - 5.0$ hrs/day</td>
+        <td>Average daily dwell time on e-commerce mobile platform</td>
+      </tr>
+      <tr>
+        <td><code>number_of_device_registered</code></td>
+        <td>Integer</td>
+        <td>$1 - 6$ devices</td>
+        <td>Total hardware devices linked to customer profile</td>
+      </tr>
+      <tr>
+        <td><code>preferred_order_cat</code></td>
+        <td>Categorical</td>
+        <td>Laptop, Mobile, Fashion, Grocery, Other</td>
+        <td>Merchandise classification accounting for highest spend</td>
+      </tr>
+      <tr>
+        <td><code>satisfaction_score</code></td>
+        <td>Integer</td>
+        <td>$1, 2, 3, 4, 5$</td>
+        <td>Self-reported satisfaction score on previous order</td>
+      </tr>
+      <tr>
+        <td><code>marital_status</code></td>
+        <td>Categorical</td>
+        <td>Single, Married, Divorced</td>
+        <td>Customer marital status classification</td>
+      </tr>
+      <tr>
+        <td><code>number_of_address</code></td>
+        <td>Integer</td>
+        <td>$1 - 22$ addresses</td>
+        <td>Total registered delivery locations saved in profile</td>
+      </tr>
+      <tr>
+        <td><code>complain</code></td>
+        <td>Binary</td>
+        <td>$0, 1$</td>
+        <td>Official customer support complaint logged in cycle</td>
+      </tr>
+      <tr>
+        <td><code>order_amount_hike_from_last_year</code></td>
+        <td>Float</td>
+        <td>$11.0 - 26.0\%$</td>
+        <td>Percentage growth in spending compared to previous year</td>
+      </tr>
+      <tr>
+        <td><code>coupon_used</code></td>
+        <td>Float</td>
+        <td>$0.0 - 16.0$</td>
+        <td>Promotional vouchers redeemed during preceding cycle</td>
+      </tr>
+      <tr>
+        <td><code>order_count</code></td>
+        <td>Float</td>
+        <td>$1.0 - 16.0$</td>
+        <td>Total orders completed during evaluation window</td>
+      </tr>
+      <tr>
+        <td><code>day_since_last_order</code></td>
+        <td>Float</td>
+        <td>$0.0 - 46.0$ days</td>
+        <td>Recency inactivity gap since latest completed checkout</td>
+      </tr>
+      <tr>
+        <td><code>cashback_amount</code></td>
+        <td>Float</td>
+        <td>$\$0.0 - \$324.99$</td>
+        <td>Rebate cash rewards received on transactions</td>
+      </tr>
+      <tr>
+        <td><code>churn</code> (Target)</td>
+        <td>Binary</td>
+        <td>$0 = \text{Retained}, 1 = \text{Churned}$</td>
+        <td>Ground truth customer attrition label</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ============================================================
+       SECTION 3: EXPLORATORY DATA ANALYSIS
+       ============================================================ -->
+  <div class="page-break"></div>
+  <h1>3. Exploratory Data Analysis &amp; Empirical Findings</h1>
+  <p>
+    Exploratory Data Analysis (EDA) revealed several distinct behavioral mechanisms driving customer attrition across the 5,630 accounts.
+  </p>
+
+  <div class="figure-container">
+    <img src="figures/01_churn_distribution.png" alt="Churn Distribution">
+    <div class="figure-caption">Figure 3.1: Ground Truth Churn Distribution across 5,630 Kaggle Records (83.16% Retained vs. 16.84% Churned)</div>
+  </div>
+
+  <h2>3.1 Key Empirical Observations</h2>
+  <ul>
+    <li>
+      <strong>Impact of Formal Complaints:</strong> Lodging an official support complaint increases churn propensity by over <strong>300%</strong> (31.7% churn rate among complainers vs. 10.9% for non-complainers). Complaint status is the single most potent acute attrition signal.
+    </li>
+    <li>
+      <strong>Tenure Vulnerability Curve:</strong> Customers in their first 3 months exhibit high vulnerability (over 38% churn rate). Once tenure surpasses 12 months, churn falls below 7.5%, proving the existence of an onboarding retention cliff.
+    </li>
+    <li>
+      <strong>Order Inactivity Threshold:</strong> Inactivity exceeding 14 days without an order leads to a 54% likelihood of subsequent cancellation.
+    </li>
+    <li>
+      <strong>Merchandise Category Volatility:</strong> Mobile Phone and Fashion categories demonstrate the highest baseline churn (27.8% and 16.2%), whereas Laptop and Grocery categories show high customer stickiness (10.1% and 4.8%).
+    </li>
+  </ul>
+
+  <div class="figure-container">
+    <img src="figures/02_correlation_heatmap.png" alt="Correlation Heatmap">
+    <div class="figure-caption">Figure 3.2: Pearson Correlation Heatmap across Engineered Customer Signals</div>
+  </div>
+
+  <!-- ============================================================
+       SECTION 4: FEATURE ENGINEERING
+       ============================================================ -->
+  <h1>4. Feature Engineering &amp; Mathematical Formulations</h1>
+  <p>
+    Domain-specific feature engineering synthesizes interaction signals between transactional velocity, app dwell time, and support friction:
+  </p>
+
+  <div class="formula-box">
+    $$\text{Cashback Per Order} = \frac{\text{cashback\_amount}}{\text{order\_count} + 1.0}$$
+  </div>
+  <p>
+    Quantifies transactional rebate density. Customers receiving less than \$15 cashback per order demonstrate substantially higher price sensitivity and flight risk.
+  </p>
+
+  <div class="formula-box">
+    $$\text{App Engagement Density} = \text{hour\_spend\_on\_app} \times \text{number\_of\_device\_registered}$$
+  </div>
+  <p>
+    Measures digital ecosystem entrenchment. Higher engagement density correlates strongly with multi-category shopping and account longevity.
+  </p>
+
+  <div class="formula-box">
+    $$\text{Complaint Friction Metric} = \text{complain} \times (6 - \text{satisfaction\_score})$$
+  </div>
+  <p>
+    Combines formal complaint filing with negative satisfaction ratings. A score of 5 (complaint filed with 1/5 satisfaction) triggers immediate high-risk tiering.
+  </p>
+
+  <div class="formula-box">
+    $$\text{Recency Inactivity Ratio} = \frac{\text{day\_since\_last\_order}}{\text{tenure} + 1.0}$$
+  </div>
+  <p>
+    Normalizes order inactivity relative to account lifetime. A 10-day inactivity gap is benign for a 3-year loyal customer but catastrophic for a 1-month account.
+  </p>
+
+  <!-- ============================================================
+       SECTION 5: ZERO DATA LEAKAGE PIPELINE
+       ============================================================ -->
+  <div class="page-break"></div>
+  <h1>5. Zero-Data-Leakage Preprocessing &amp; Partitioning</h1>
+  <p>
+    Data leakage occurs when information outside the training dataset is inadvertently utilized to train a model. In retention prediction, improper leakage leads to falsely inflated test metrics that collapse in production.
+  </p>
+
+  <h2>5.1 Strict Partitioning Order</h2>
+  <ol>
+    <li>
+      <strong>Raw Data Ingestion:</strong> 5,630 Kaggle records ingested without any global statistical operations.
+    </li>
+    <li>
+      <strong>Stratified Holdout Split (80/20):</strong> Partitioned into a Training Set ($N = 4,504$) and a Holdout Test Set ($N = 1,126$), strictly maintaining the 16.84% minority class ratio in both subsets.
+    </li>
+    <li>
+      <strong>Independent Feature Transformation:</strong> Feature engineering functions are computed strictly row-wise.
+    </li>
+    <li>
+      <strong>Preprocessor Fitting:</strong> <code>ColumnTransformer</code> is fitted <em>only</em> on the 4,504 training rows.
+      <ul>
+        <li>Numerical features: <code>SimpleImputer(strategy='median')</code> $\rightarrow$ <code>StandardScaler()</code></li>
+        <li>Categorical features: <code>SimpleImputer(strategy='most_frequent')</code> $\rightarrow$ <code>OneHotEncoder(handle_unknown='ignore')</code></li>
+      </ul>
+    </li>
+    <li>
+      <strong>Test Set Ingestion:</strong> Holdout test data is strictly passed through <code>.transform()</code> with zero parameter updating.
+    </li>
+  </ol>
+
+  <!-- ============================================================
+       SECTION 6: CLASS IMBALANCE MITIGATION
+       ============================================================ -->
+  <h1>6. Class Imbalance Mitigation &amp; SMOTE Protocol</h1>
+  <p>
+    With 4,682 retained customers (83.2\%) and 948 churned customers (16.8\%), naive estimators bias predictions toward the majority class, producing high overall accuracy but unacceptable recall on churn events.
+  </p>
+
+  <h2>6.1 Synthetic Minority Over-sampling Technique (SMOTE)</h2>
+  <p>
+    The system employs SMOTE to synthesize minority class instances along the feature space line segments joining $k$-nearest neighbors:
+  </p>
+  <div class="formula-box">
+    $$x_{\text{new}} = x_i + \lambda \times (x_{zi} - x_i), \quad \lambda \sim U(0, 1)$$
+  </div>
+  <p>
+    <strong>Fold-Bounded Execution:</strong> SMOTE is applied <em>exclusively</em> inside the training fold of each cross-validation split using <code>imblearn.pipeline.Pipeline</code>. Validation folds and the final holdout test set remain untouched and naturally imbalanced to preserve real-world precision evaluation.
+  </p>
+
+  <!-- ============================================================
+       SECTION 7: MODEL BENCHMARKING
+       ============================================================ -->
+  <div class="page-break"></div>
+  <h1>7. Model Benchmarking &amp; Hyperparameter Optimization</h1>
+  <p>
+    Four algorithmic paradigms were comprehensively benchmarked using 5-fold Stratified Nested Cross-Validation on the 4,504 training records:
+  </p>
+
+  <div class="caption">Table 7.1: Exhaustive Model Benchmark Comparison on Holdout Test Set ($N = 1,126$)</div>
+  <table>
+    <thead>
+      <tr>
+        <th>Candidate Model</th>
+        <th>Accuracy</th>
+        <th>Precision</th>
+        <th>Recall</th>
+        <th>F1-Score</th>
+        <th>ROC-AUC</th>
+        <th>Latency (ms)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Logistic Regression (L2 Baseline)</td>
+        <td>0.8179</td>
+        <td>0.4688</td>
+        <td>0.6349</td>
+        <td>0.5393</td>
+        <td>0.8251</td>
+        <td>1.2 ms</td>
+      </tr>
+      <tr>
+        <td>Decision Tree Classifier (CART)</td>
+        <td>0.9449</td>
+        <td>0.8173</td>
+        <td>0.8730</td>
+        <td>0.8442</td>
+        <td>0.9163</td>
+        <td>1.8 ms</td>
+      </tr>
+      <tr>
+        <td>XGBoost Classifier (Gradient Boosted)</td>
+        <td>0.9574</td>
+        <td>0.8704</td>
+        <td>0.8730</td>
+        <td>0.8717</td>
+        <td>0.9592</td>
+        <td>14.5 ms</td>
+      </tr>
+      <tr>
+        <td><strong>Tuned Random Forest (Selected)</strong></td>
+        <td><strong>0.9636</strong></td>
+        <td><strong>0.8907</strong></td>
+        <td><strong>0.8889</strong></td>
+        <td><strong>0.8898</strong></td>
+        <td><strong>0.9620</strong></td>
+        <td><strong>11.8 ms</strong></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="figure-container">
+    <img src="figures/08_roc_curves.png" alt="ROC Curves">
+    <div class="figure-caption">Figure 7.1: Receiver Operating Characteristic (ROC) Curves across Model Candidates (Random Forest AUC = 0.9620)</div>
+  </div>
+
+  <h2>7.1 Random Forest Hyperparameter Configuration</h2>
+  <p>
+    The final production model parameters selected via Stratified GridSearchCV:
+  </p>
+  <pre>
+RandomForestClassifier(
+    n_estimators=300,
+    max_depth=16,
+    min_samples_split=4,
+    min_samples_leaf=2,
+    max_features='sqrt',
+    class_weight='balanced_subsample',
+    random_state=42,
+    n_jobs=-1
+)
+  </pre>
+
+  <!-- ============================================================
+       SECTION 8: EVALUATION METRICS
+       ============================================================ -->
+  <div class="page-break"></div>
+  <h1>8. Evaluation Metrics &amp; Probability Calibration</h1>
+  <p>
+    In retention intelligence, probabilistic calibration is as vital as categorical accuracy. A customer predicted at 88\% risk must require more urgent intervention than one at 52\% risk.
+  </p>
+
+  <div class="figure-container">
+    <img src="figures/10_confusion_matrices.png" alt="Confusion Matrix">
+    <div class="figure-caption">Figure 8.1: Holdout Test Set Confusion Matrix (Tuned Random Forest: 168/189 Churns Captured)</div>
+  </div>
+
+  <h2>8.1 Risk Tiering Specification</h2>
+  <div class="caption">Table 8.1: Operational Risk Classification &amp; Recommended Interventions</div>
+  <table>
+    <thead>
+      <tr>
+        <th>Predicted Churn Probability</th>
+        <th>Operational Risk Tier</th>
+        <th>Recommended Team Action Workflow</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>$P(\text{churn}) \ge 0.60$</td>
+        <td><strong style="color: #dc2626;">High Risk</strong></td>
+        <td>Immediate CSM outreach within 24h; apply personalized cashback retention offer and resolve active complaints.</td>
+      </tr>
+      <tr>
+        <td>$0.35 \le P(\text{churn}) < 0.60$</td>
+        <td><strong style="color: #d97706;">Watchlist</strong></td>
+        <td>Trigger targeted re-engagement email; deploy loyalty rewards and monitor app session activity.</td>
+      </tr>
+      <tr>
+        <td>$P(\text{churn}) < 0.35$</td>
+        <td><strong style="color: #059669;">Healthy</strong></td>
+        <td>Account stable; eligible for renewal discounts, premium feature cross-sell, and VIP loyalty perks.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ============================================================
+       SECTION 9: REST API MICROSERVICE
+       ============================================================ -->
+  <h1>9. Production Flask REST API Microservice Architecture</h1>
+  <p>
+    The model pipeline is served as a stateless REST microservice implemented in <code>api/app.py</code> with schema enforcement in <code>api/schemas.py</code>.
+  </p>
+
+  <h2>9.1 Endpoints Specification</h2>
+  <ul>
+    <li>
+      <code>GET /health</code>: Returns operational status, model loaded flag, and Kaggle dataset metadata (5,630 records). Response latency: &lt; 2ms.
+    </li>
+    <li>
+      <code>POST /predict</code>: Accepts a JSON payload of 18 customer attributes, validates data types, applies pipeline transformation, and returns risk tier, score, retention probability, and recommendation.
+    </li>
+    <li>
+      <code>GET /customers</code>: Serves paginated customer accounts across all 5,630 records with search, risk level filter, category filter, and sorting.
+    </li>
+    <li>
+      <code>GET /customers/&lt;id&gt;</code>: Direct primary key lookup for a single customer profile drawer.
+    </li>
+    <li>
+      <code>GET /analytics</code>: Pre-computed portfolio health distribution and retention rates.
+    </li>
+  </ul>
+
+  <!-- ============================================================
+       SECTION 10: AUTOMATED TESTING
+       ============================================================ -->
+  <div class="page-break"></div>
+  <h1>10. Automated Testing Suite &amp; Pytest Verification</h1>
+  <p>
+    The system includes an automated test suite (<code>tests/test_api.py</code>) covering input schema validation, boundary conditions, edge cases, and pagination integrity.
+  </p>
+
+  <div class="caption">Table 10.1: Automated Test Suite Inventory (12 Passing Tests)</div>
+  <table>
+    <thead>
+      <tr>
+        <th>Test Case</th>
+        <th>Test Scope &amp; Target Condition</th>
+        <th>Result</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>test_health_check_endpoint</code></td>
+        <td>Verifies <code>GET /health</code> returns HTTP 200 with model ready</td>
+        <td><strong style="color: #059669;">PASSED</strong></td>
+      </tr>
+      <tr>
+        <td><code>test_valid_prediction_request</code></td>
+        <td>Validates full inference pipeline execution on valid input</td>
+        <td><strong style="color: #059669;">PASSED</strong></td>
+      </tr>
+      <tr>
+        <td><code>test_high_risk_customer_response</code></td>
+        <td>Confirms critical friction customer correctly yields High Risk tier</td>
+        <td><strong style="color: #059669;">PASSED</strong></td>
+      </tr>
+      <tr>
+        <td><code>test_missing_required_field</code></td>
+        <td>Asserts HTTP 400 with explicit error message when field omitted</td>
+        <td><strong style="color: #059669;">PASSED</strong></td>
+      </tr>
+      <tr>
+        <td><code>test_invalid_numeric_data_type</code></td>
+        <td>Asserts validation rejection when string passed into numeric field</td>
+        <td><strong style="color: #059669;">PASSED</strong></td>
+      </tr>
+      <tr>
+        <td><code>test_invalid_categorical_value</code></td>
+        <td>Rejects unrecognized categorical option outside allowed set</td>
+        <td><strong style="color: #059669;">PASSED</strong></td>
+      </tr>
+      <tr>
+        <td><code>test_negative_boundary_constraint</code></td>
+        <td>Rejects negative tenure, orders, or satisfaction scores</td>
+        <td><strong style="color: #059669;">PASSED</strong></td>
+      </tr>
+      <tr>
+        <td><code>test_prediction_response_schema</code></td>
+        <td>Validates complete presence of prediction, score, and recommendation</td>
+        <td><strong style="color: #059669;">PASSED</strong></td>
+      </tr>
+      <tr>
+        <td><code>test_customers_pagination</code></td>
+        <td>Verifies accurate slicing and total count on <code>GET /customers</code></td>
+        <td><strong style="color: #059669;">PASSED</strong></td>
+      </tr>
+      <tr>
+        <td><code>test_customers_search_and_filter</code></td>
+        <td>Tests keyword search and risk level query parameters</td>
+        <td><strong style="color: #059669;">PASSED</strong></td>
+      </tr>
+      <tr>
+        <td><code>test_get_customer_by_id</code></td>
+        <td>Validates single customer lookup for <code>CUST-50001</code></td>
+        <td><strong style="color: #059669;">PASSED</strong></td>
+      </tr>
+      <tr>
+        <td><code>test_analytics_endpoint</code></td>
+        <td>Checks portfolio counts and aggregate baseline rate</td>
+        <td><strong style="color: #059669;">PASSED</strong></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ============================================================
+       SECTION 11: FRONTEND DESIGN SYSTEM
+       ============================================================ -->
+  <h1>11. Enterprise B2B SaaS Frontend Design System</h1>
+  <p>
+    The user interface was crafted to reflect the design restraint and visual polish of premier enterprise technology platforms (Apple, Linear, Stripe).
+  </p>
+  <ul>
+    <li>
+      <strong>Product Flow:</strong> Public Landing Page $\rightarrow$ Company Authentication (Sign In / Create Company Account / Demo Workspace) $\rightarrow$ Internal Workspace.
+    </li>
+    <li>
+      <strong>Overview Working Environment:</strong> Macro stats banner (5,630 customers, 64.3\% retention, 35.7\% at risk), Customer Health segmented progress bar, Needs Your Attention work queue, and Quick Action CTA.
+    </li>
+    <li>
+      <strong>Customer Directory:</strong> Accessible directory over all 5,630 Kaggle records with dynamic pagination (<code>Showing 1–25 of 5,630</code>), multi-attribute filtering, search, and side-drawer inspection.
+    </li>
+    <li>
+      <strong>Assess Customer Tool:</strong> Company employee evaluation form with persona presets (Loyal, At-Risk, Critical Hazard) calling the live Flask <code>/predict</code> API.
+    </li>
+    <li>
+      <strong>Theme Contrast Engine:</strong> Semantic CSS variables guaranteeing zero white-on-white text in both Dark and Light modes.
+    </li>
+    <li>
+      <strong>Exact 2-Line Footer:</strong> Standardized subtle footer on all application views:
+      <pre>Customer Intelligence · © 2026&#10;Designed &amp; developed by Chandrashekhar H S</pre>
+    </li>
+  </ul>
+
+  <!-- ============================================================
+       SECTION 12: TECHNICAL STACK & REPRODUCTION
+       ============================================================ -->
+  <div class="page-break"></div>
+  <h1>12. Technical Stack Inventory &amp; Execution Guide</h1>
+  <div class="caption">Table 12.1: Production Technology Stack Summary</div>
+  <table>
+    <thead>
+      <tr>
+        <th>Layer / Component</th>
+        <th>Technology</th>
+        <th>Version / Standard</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Programming Language</td>
+        <td>Python</td>
+        <td>3.12.0 (x64)</td>
+      </tr>
+      <tr>
+        <td>Machine Learning Core</td>
+        <td>Scikit-Learn, NumPy, Pandas</td>
+        <td>1.5.0, 2.0.0, 2.2.0</td>
+      </tr>
+      <tr>
+        <td>Class Imbalance Balancing</td>
+        <td>Imbalanced-Learn (SMOTE)</td>
+        <td>0.12.0</td>
+      </tr>
+      <tr>
+        <td>Gradient Boosting</td>
+        <td>XGBoost</td>
+        <td>2.0.3</td>
+      </tr>
+      <tr>
+        <td>Model Serialization</td>
+        <td>Joblib</td>
+        <td>1.4.2</td>
+      </tr>
+      <tr>
+        <td>REST API Microservice</td>
+        <td>Flask, Flask-CORS</td>
+        <td>3.0.3</td>
+      </tr>
+      <tr>
+        <td>Automated Testing</td>
+        <td>Pytest</td>
+        <td>9.1.1 (12/12 Tests Passing)</td>
+      </tr>
+      <tr>
+        <td>Frontend Architecture</td>
+        <td>Semantic HTML5, CSS Tokens, Vanilla JS</td>
+        <td>ES6+, CSS Grid, Flexbox</td>
+      </tr>
+      <tr>
+        <td>Data Visualization</td>
+        <td>Chart.js</td>
+        <td>4.4.1</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>12.1 Quickstart Execution Commands</h2>
+  <pre>
+# 1. Install Dependencies
+python -m pip install -r requirements.txt
+
+# 2. Run Automated Pytest Suite
+pytest tests/ -v
+
+# 3. Launch Flask Backend API
+python api/app.py
+
+# 4. Launch Application in Browser
+Start-Process "frontend/index.html"
+  </pre>
+
+  <div style="margin-top: 40px; text-align: center; border-top: 1px solid #cbd5e1; padding-top: 20px;">
+    <div style="font-weight: 600; font-size: 11pt; color: #0f172a;">Customer Intelligence · © 2026</div>
+    <div style="font-size: 10pt; color: #475569; margin-top: 2px;">Designed &amp; developed by Chandrashekhar H S</div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,87 @@
+{
+    "dataset_name": "E-Commerce Customer Churn Dataset",
+    "description": "Synthetic benchmark dataset for binary customer churn classification incorporating realistic business correlations and data flaws.",
+    "features": {
+        "customer_age": {
+            "type": "Numerical (Integer)",
+            "description": "Customer age in years (18 to 75). Incomplete profiles may record 0.",
+            "unit": "Years"
+        },
+        "tenure_months": {
+            "type": "Numerical (Integer)",
+            "description": "Number of months the customer has been active with the e-commerce platform.",
+            "unit": "Months"
+        },
+        "monthly_spend": {
+            "type": "Numerical (Float)",
+            "description": "Average monthly expenditure by the customer in USD.",
+            "unit": "USD ($)"
+        },
+        "total_spend": {
+            "type": "Numerical (Float)",
+            "description": "Cumulative historical spend across customer lifetime.",
+            "unit": "USD ($)"
+        },
+        "login_frequency": {
+            "type": "Numerical (Integer)",
+            "description": "Average number of portal / mobile app logins per month.",
+            "unit": "Logins / Month"
+        },
+        "support_tickets": {
+            "type": "Numerical (Integer / Float)",
+            "description": "Number of customer support tickets raised in the previous 6 months.",
+            "unit": "Count"
+        },
+        "payment_delay_days": {
+            "type": "Numerical (Integer)",
+            "description": "Number of days customer payments or invoice settlements were overdue.",
+            "unit": "Days"
+        },
+        "subscription_type": {
+            "type": "Categorical (String)",
+            "description": "Account tier of the customer: Basic, Standard, or Premium.",
+            "values": [
+                "Basic",
+                "Standard",
+                "Premium"
+            ]
+        },
+        "contract_type": {
+            "type": "Categorical (String)",
+            "description": "Agreement duration structure: Month-to-Month, One-Year, or Two-Year.",
+            "values": [
+                "Month-to-Month",
+                "One-Year",
+                "Two-Year"
+            ]
+        },
+        "discount_used": {
+            "type": "Binary / Categorical (Integer)",
+            "description": "Indicates whether the customer redeemed promotional coupons or discounts (0 = No, 1 = Yes).",
+            "values": [
+                0,
+                1
+            ]
+        },
+        "last_login_days": {
+            "type": "Numerical (Integer / Float)",
+            "description": "Recency of last login in days before observation date.",
+            "unit": "Days"
+        },
+        "churn": {
+            "type": "Target Variable (Binary Integer)",
+            "description": "Target churn indicator: 0 = Customer Retained, 1 = Customer Churned.",
+            "values": [
+                0,
+                1
+            ]
+        }
+    },
+    "engineered_features": {
+        "average_historical_monthly_spend": "total_spend / (tenure_months + 1)",
+        "spend_deviation": "monthly_spend - average_historical_monthly_spend",
+        "engagement_score": "login_frequency / (last_login_days + 1)",
+        "support_ticket_intensity": "support_tickets / (tenure_months + 1)",
+        "payment_risk_score": "payment_delay_days * support_tickets"
+    }
+}

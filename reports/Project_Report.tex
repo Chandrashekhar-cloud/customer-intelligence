@@ -1,0 +1,246 @@
+\documentclass[11pt,a4paper]{article}
+
+% ==============================================================================
+% PACKAGES & CONFIGURATION
+% ==============================================================================
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+
+% Color Palette Setup
+\definecolor{primarydark}{RGB}{15, 23, 42}
+\definecolor{accentblue}{RGB}{37, 99, 235}
+\definecolor{codebg}{RGB}{248, 250, 252}
+\definecolor{bordercolor}{RGB}{226, 232, 240}
+\definecolor{tablehead}{RGB}{241, 245, 249}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=accentblue,
+    citecolor=accentblue,
+    urlcolor=accentblue,
+    pdfauthor={Chandrashekhar H S},
+    pdftitle={Customer Intelligence: End-to-End Retention Analytics & ML Architecture}
+}
+
+% Code Listing Configuration
+\lstset{
+    backgroundcolor=\color{codebg},
+    basicstyle=\ttfamily\footnotesize,
+    breaklines=true,
+    frame=single,
+    rulecolor=\color{bordercolor},
+    keywordstyle=\color{accentblue}\bfseries,
+    commentstyle=\color{gray},
+    stringstyle=\color{teal},
+    showstringspaces=false,
+    tabsize=2,
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    numbersep=8pt
+}
+
+% Header and Footer
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textsl{Customer Intelligence: Machine Learning System Report}}
+\fancyhead[R]{\thepage}
+\fancyfoot[C]{\footnotesize Customer Intelligence $\cdot$ \copyright\ 2026 $\cdot$ Designed \& developed by Chandrashekhar H S}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% Section Titles Styling
+\titleformat{\section}{\Large\bfseries\color{primarydark}}{\thesection}{1em}{}[\titlerule]
+\titleformat{\subsection}{\large\bfseries\color{primarydark}}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries\color{primarydark}}{\thesubsubsection}{1em}{}
+
+% ==============================================================================
+% DOCUMENT BEGINS
+% ==============================================================================
+\begin{document}
+
+% ------------------------------------------------------------------------------
+% TITLE BLOCK
+% ------------------------------------------------------------------------------
+\begin{titlepage}
+    \centering
+    \vspace*{1.5cm}
+    
+    {\Huge \textbf{Customer Intelligence}}\\[0.4cm]
+    {\LARGE \textbf{End-to-End Predictive Analytics, Zero-Leakage ML Pipeline, and Enterprise Microservice Architecture}}\\[1.5cm]
+    
+    \textbf{\Large Comprehensive Technical System Report (A--Z)}\\[2cm]
+    
+    \begin{minipage}{0.48\textwidth}
+        \flushleft
+        \textbf{Author:} Chandrashekhar H S\\
+        \textbf{Domain:} Machine Learning \& MLOps\\
+        \textbf{Target:} Binary Customer Retention ($\{0, 1\}$)\\
+        \textbf{Frameworks:} Scikit-Learn, Imbalanced-Learn, Flask
+    \end{minipage}
+    \begin{minipage}{0.48\textwidth}
+        \flushright
+        \textbf{Dataset Size:} 5,630 Authentic Records (Kaggle)\\
+        \textbf{Validation:} 5-Fold Stratified Nested CV\\
+        \textbf{Primary Model:} Tuned Random Forest (ROC-AUC 0.9620)\\
+        \textbf{Serving:} Flask REST API \& SaaS Dashboard
+    \end{minipage}
+    
+    \vfill
+    
+    \rule{\textwidth}{0.4pt}\\[0.4cm]
+    {\large Customer Intelligence $\cdot$ \copyright\ 2026}\\[0.2cm]
+    {\small Designed \& developed by Chandrashekhar H S}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+% ------------------------------------------------------------------------------
+% SECTION 1: EXECUTIVE SUMMARY
+% ------------------------------------------------------------------------------
+\section{Executive Summary \& Product Vision}
+Customer attrition represents one of the most critical threats to enterprise valuation and unit economics. In modern B2B subscription and e-commerce models, the cost of acquiring a new customer ($CAC$) is between five and seven times greater than the capital required to retain an existing account ($CRC$).
+
+\textbf{Customer Intelligence} is a production-grade machine learning and analytical decision system designed specifically for enterprise Customer Success, Retention, and Operations teams. The platform shifts company operations from \textit{reactive post-cancellation fire-fighting} to \textit{proactive, signal-driven retention interventions}.
+
+\subsection{Core Engineering Highlights}
+\begin{itemize}[noitemsep]
+    \item \textbf{Data Authenticity}: Built on 5,630 verified customer accounts from the Kaggle E-Commerce Customer Churn dataset, indexed realistically from \texttt{CUST-50001} through \texttt{CUST-55630}.
+    \item \textbf{Leak-Free Pipeline}: Strict mathematical separation of preprocessing transformers fitted exclusively on training splits, eliminating data leakage.
+    \item \textbf{SMOTE Imbalance Correction}: Handled class imbalance (83.2\% retained vs. 16.8\% churned) using synthetic minority over-sampling bounded exclusively within cross-validation folds.
+    \item \textbf{Model Benchmark}: Evaluated Logistic Regression, Decision Trees, Random Forest, and XGBoost. The tuned Random Forest model achieved a top-tier ROC-AUC score of \textbf{0.9620}.
+    \item \textbf{Microservice Architecture}: Sub-15ms inference latency served via a stateless Flask 3.0 REST API with comprehensive schema validation and full Pytest verification (12 automated unit and integration tests passing).
+    \item \textbf{Enterprise User Experience}: Monochromatic SaaS interface featuring a Public Landing Page, Company Authentication, and an internal Work Queue with real-time prediction and side-drawer inspection.
+\end{itemize}
+
+% ------------------------------------------------------------------------------
+% SECTION 2: DATASET ARCHITECTURE
+% ------------------------------------------------------------------------------
+\section{Dataset Architecture \& Statistical Exploratory Data Analysis}
+The data infrastructure processes 5,630 customer records spanning 18 behavioral, financial, logistical, and engagement dimensions.
+
+\subsection{Raw Feature Inventory}
+\begin{table}[H]
+    \centering
+    \small
+    \caption{Inventory of Kaggle E-Commerce Customer Attributes}
+    \begin{tabular}{lllp{6cm}}
+        \toprule
+        \textbf{Attribute} & \textbf{Data Type} & \textbf{Domain/Range} & \textbf{Business Meaning} \\
+        \midrule
+        \texttt{customer\_id} & String & \texttt{CUST-50001}--\texttt{55630} & Unique enterprise customer account index \\
+        \texttt{tenure} & Float & $0.0 - 61.0$ months & Active account relationship duration \\
+        \texttt{city\_tier} & Integer & $\{1, 2, 3\}$ & Urbanization classification of customer domicile \\
+        \texttt{warehouse\_to\_home} & Float & $5.0 - 127.0$ km & Logistical shipping distance from dispatch center \\
+        \texttt{preferred\_payment\_mode} & Categorical & 5 classes & Debit Card, Credit Card, E-Wallet, UPI, COD \\
+        \texttt{preferred\_order\_cat} & Categorical & 5 classes & Laptop, Mobile Phone, Fashion, Grocery, Others \\
+        \texttt{satisfaction\_score} & Integer & $\{1, 2, 3, 4, 5\}$ & Self-reported Net Promoter / satisfaction score \\
+        \texttt{complain} & Binary & $\{0, 1\}$ & Official formal complaint lodged in preceding cycle \\
+        \texttt{day\_since\_last\_order} & Float & $0.0 - 46.0$ days & Purchase inactivity recency \\
+        \texttt{cashback\_amount} & Float & $\$0.0 - \$324.99$ & Cumulative reward rebates accrued \\
+        \texttt{churn} (Target) & Binary & $\{0, 1\}$ & Account attrition ($1 = \text{Churned}, 0 = \text{Retained}$) \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\subsection{Feature Engineering Transformations}
+To extract higher-order predictive signal prior to model ingestion, domain-specific features were mathematically synthesized:
+\begin{equation}
+    \text{Cashback Per Order} = \frac{\text{cashback\_amount}}{\text{order\_count} + 1.0}
+\end{equation}
+\begin{equation}
+    \text{App Engagement Density} = \text{hour\_spend\_on\_app} \times \text{number\_of\_device\_registered}
+\end{equation}
+\begin{equation}
+    \text{Complaint Friction Metric} = \text{complain} \times (6 - \text{satisfaction\_score})
+\end{equation}
+\begin{equation}
+    \text{Recency Ratio} = \frac{\text{day\_since\_last\_order}}{\text{tenure} + 1.0}
+\end{equation}
+
+% ------------------------------------------------------------------------------
+% SECTION 3: MACHINE LEARNING PIPELINE
+% ------------------------------------------------------------------------------
+\section{Zero-Leakage Machine Learning Architecture}
+
+\subsection{Partitioning \& Preprocessing Pipeline}
+Data leakage is the most prevalent failure mode in machine learning systems. The system enforces an 80/20 stratified split:
+\begin{itemize}[noitemsep]
+    \item \textbf{Training Split}: 4,504 records (3,745 retained, 759 churned)
+    \item \textbf{Holdout Test Split}: 1,126 records (937 retained, 189 churned)
+\end{itemize}
+
+All transformation parameters (imputation medians, standard scaling means and variances, one-hot category dictionaries) are computed \textit{strictly} on training folds using \texttt{sklearn.compose.ColumnTransformer}.
+
+\subsection{Model Benchmark Results}
+\begin{table}[H]
+    \centering
+    \small
+    \caption{Model Evaluation \& Cross-Validation Benchmark Comparison}
+    \begin{tabular}{lccccc}
+        \toprule
+        \textbf{Model Architecture} & \textbf{Accuracy} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-Score} & \textbf{ROC-AUC} \\
+        \midrule
+        Logistic Regression (Baseline) & 0.8179 & 0.4688 & 0.6349 & 0.5393 & 0.8251 \\
+        Decision Tree Classifier & 0.9449 & 0.8173 & 0.8730 & 0.8442 & 0.9163 \\
+        XGBoost Classifier & 0.9574 & 0.8704 & 0.8730 & 0.8717 & 0.9592 \\
+        \textbf{Tuned Random Forest (Selected)} & \textbf{0.9636} & \textbf{0.8907} & \textbf{0.8889} & \textbf{0.8898} & \textbf{0.9620} \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+% ------------------------------------------------------------------------------
+% SECTION 4: MICROSERVICE & API
+% ------------------------------------------------------------------------------
+\section{REST Microservice Architecture \& Automated Testing}
+The machine learning pipeline is containerized behind a stateless Flask 3.0 REST service.
+
+\subsection{API Endpoint Specification}
+\begin{itemize}[noitemsep]
+    \item \texttt{GET /health}: System operational telemetry and model loaded flag.
+    \item \texttt{POST /predict}: Validates payload schema, executes preprocessor transform, runs inference, calibrates probabilities, and outputs risk tier with recommended CSM action.
+    \item \texttt{GET /customers}: Serves the full 5,630 Kaggle accounts directory with search, risk level filtering, category filtering, and pagination.
+    \item \texttt{GET /customers/<id>}: Single customer record lookup.
+\end{itemize}
+
+\subsection{Automated Test Suite Verification}
+All 12 automated Pytest integration and boundary validation tests passed with 100\% success rate:
+\begin{lstlisting}[language=bash]
+pytest tests/ -v
+# ============================= 12 passed in 15.42s =============================
+\end{lstlisting}
+
+% ------------------------------------------------------------------------------
+% SECTION 5: FRONTEND WORKSPACE
+% ------------------------------------------------------------------------------
+\section{Enterprise Frontend Application Architecture}
+The web application provides a cohesive, Figma-grade B2B customer retention workspace:
+\begin{enumerate}[noitemsep]
+    \item \textbf{Public Landing Page}: Clear value proposition, proof metrics strip, and an interactive desktop preview window showing Customer Health, the Attention Queue, and Risk Assessment.
+    \item \textbf{Authentication System}: Work email and password authentication with single-click Demo Workspace access.
+    \item \textbf{Overview Working Environment}: Focused work queue with macro retention numbers, segmented health progress bar, top-risk accounts, and immediate action buttons.
+    \item \textbf{Customers Directory}: Searchable, filterable directory over all 5,630 Kaggle records with dynamic pagination (\texttt{1--25 of 5,630}) and side-drawer inspection.
+    \item \textbf{Assess Customer Tool}: Employee-facing evaluation tool connected live to the REST API for real-time risk scoring.
+    \item \textbf{Insights \& System}: Analytical charts and complete system telemetry.
+\end{enumerate}
+
+\vfill
+\begin{center}
+\rule{0.5\textwidth}{0.4pt}\\[0.2cm]
+{\small Customer Intelligence $\cdot$ \copyright\ 2026 $\cdot$ Designed \& developed by Chandrashekhar H S}
+\end{center}
+
+\end{document}

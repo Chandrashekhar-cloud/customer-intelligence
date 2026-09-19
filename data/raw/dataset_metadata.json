@@ -1,0 +1,39 @@
+{
+  "dataset_name": "Kaggle E-Commerce Customer Churn Analysis & Prediction",
+  "source": "Kaggle (ankitverma2010)",
+  "total_records": 5630,
+  "total_features": 18,
+  "retained_count": 4682,
+  "churned_count": 948,
+  "retention_rate": 83.16,
+  "churn_rate": 16.84,
+  "missing_values": {
+    "tenure": 264,
+    "warehouse_to_home": 251,
+    "hour_spend_on_app": 255,
+    "order_amount_hike_from_last_year": 265,
+    "coupon_used": 256,
+    "order_count": 258,
+    "day_since_last_order": 307
+  },
+  "feature_list": [
+    "tenure",
+    "preferred_login_device",
+    "city_tier",
+    "warehouse_to_home",
+    "preferred_payment_mode",
+    "gender",
+    "hour_spend_on_app",
+    "number_of_device_registered",
+    "preferred_order_cat",
+    "satisfaction_score",
+    "marital_status",
+    "number_of_address",
+    "complain",
+    "order_amount_hike_from_last_year",
+    "coupon_used",
+    "order_count",
+    "day_since_last_order",
+    "cashback_amount"
+  ]
+}

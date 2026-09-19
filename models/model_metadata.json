@@ -1,0 +1,95 @@
+{
+    "model_name": "Tuned Random Forest Classifier with Nested imblearn Pipeline & Zero-Leakage SMOTE",
+    "training_date": "2026-09-19 17:10:18",
+    "task": "E-Commerce Customer Churn Binary Classification",
+    "random_seed": 42,
+    "total_records": 5630,
+    "train_records": 4504,
+    "test_records": 1126,
+    "methodology": {
+        "cv_strategy": "Stratified 5-Fold Cross-Validation",
+        "smote_execution": "Nested inside each CV training fold via imblearn.pipeline.Pipeline",
+        "validation_fold_leakage": "Zero (Validation fold evaluated without SMOTE resampling)",
+        "holdout_test_leakage": "Zero (Untouched until final evaluation; never oversampled)"
+    },
+    "selected_model": "Random Forest",
+    "selection_rationale": "Superior ROC-AUC, F1-score, and Precision on imbalanced holdout test data",
+    "best_hyperparameters": {
+        "max_depth": null,
+        "max_features": "sqrt",
+        "min_samples_leaf": 1,
+        "min_samples_split": 2,
+        "n_estimators": 150
+    },
+    "best_cv_roc_auc": 0.9731,
+    "baseline_logistic_metrics": {
+        "accuracy": 0.8002,
+        "precision": 0.4493,
+        "recall": 0.8158,
+        "f1_score": 0.5794,
+        "roc_auc": 0.8885,
+        "pr_auc": 0.6884,
+        "confusion_matrix": {
+            "true_negatives": 746,
+            "false_positives": 190,
+            "false_negatives": 35,
+            "true_positives": 155
+        }
+    },
+    "tuned_random_forest_metrics": {
+        "accuracy": 0.9698,
+        "precision": 0.9432,
+        "recall": 0.8737,
+        "f1_score": 0.9071,
+        "roc_auc": 0.9956,
+        "pr_auc": 0.9778,
+        "confusion_matrix": {
+            "true_negatives": 926,
+            "false_positives": 10,
+            "false_negatives": 24,
+            "true_positives": 166
+        }
+    },
+    "top_features": [
+        [
+            "tenure",
+            0.1789
+        ],
+        [
+            "recency_ratio",
+            0.0584
+        ],
+        [
+            "day_since_last_order",
+            0.0543
+        ],
+        [
+            "cashback_amount",
+            0.0475
+        ],
+        [
+            "cashback_per_order",
+            0.0459
+        ],
+        [
+            "preferred_order_cat_Mobile Phone",
+            0.0448
+        ],
+        [
+            "number_of_address",
+            0.0414
+        ],
+        [
+            "complaint_friction",
+            0.0398
+        ],
+        [
+            "marital_status_Single",
+            0.0376
+        ],
+        [
+            "satisfaction_score",
+            0.0373
+        ]
+    ]
+}

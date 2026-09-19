@@ -1,0 +1,7 @@
+customer_id,tenure,preferred_login_device,city_tier,warehouse_to_home,preferred_payment_mode,gender,hour_spend_on_app,number_of_device_registered,preferred_order_cat,satisfaction_score,marital_status,number_of_address,complain,order_amount_hike_from_last_year,coupon_used,order_count,day_since_last_order,cashback_amount
+BATCH-1001,1.0,Mobile Phone,3,35.0,Cash on Delivery,Male,1.0,4,Mobile Phone,1,Single,8,1,11.0,0.0,1.0,14.0,110.0
+BATCH-1002,2.0,Mobile Phone,3,28.0,E wallet,Female,2.0,5,Mobile Phone,2,Single,7,1,12.0,1.0,2.0,11.0,125.5
+BATCH-1003,8.0,Computer,2,15.0,Debit Card,Male,3.0,3,Fashion,3,Married,4,0,16.0,2.0,3.0,5.0,154.0
+BATCH-1004,11.0,Mobile Phone,1,12.0,UPI,Female,3.0,3,Others,3,Single,3,0,14.0,1.0,4.0,4.0,148.2
+BATCH-1005,24.0,Computer,1,8.0,Credit Card,Female,4.0,3,Laptop & Accessory,5,Married,2,0,18.0,3.0,7.0,1.0,225.0
+BATCH-1006,30.0,Computer,1,6.0,Credit Card,Male,4.0,2,Grocery,5,Married,2,0,22.0,4.0,10.0,2.0,260.0
