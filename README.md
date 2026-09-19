@@ -2,7 +2,7 @@
 
 > A production-oriented B2B Customer Intelligence platform that uses Machine Learning to analyze customer behavior, estimate churn risk, explain risk factors, and help business teams prioritize customer retention actions.
 
-[🚀 **Live API**](https://customer-intelligence-ct1h.onrender.com) · 
+[🚀 **Live API**](https://customer-intelligence-ct1h.onrender.com) 
 
 ---
 
